@@ -15,7 +15,14 @@ export default function Navigation() {
       const isScrolledDown = currentScrollPos > 100;
       
       setIsScrolled(isScrolledDown);
-      setVisible(prevScrollPos > currentScrollPos || currentScrollPos < 10);
+      
+      // Hide navbar when scrolling down, show when scrolling up
+      if (currentScrollPos > prevScrollPos && currentScrollPos > 100) {
+        setVisible(false); // Hide when scrolling down
+      } else {
+        setVisible(true); // Show when scrolling up or at top
+      }
+      
       setPrevScrollPos(currentScrollPos);
     };
 
