@@ -1,16 +1,22 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { Phone, Mail, MapPin, Clock, Send, MessageCircle, Facebook, Instagram, Youtube } from 'lucide-react';
+import { useData } from '../context/DataContext';
 import Navigation from '../components/Navigation';
 import Footer from '../components/Footer';
-import { Phone, Mail, MapPin, Clock, Send, MessageCircle, Facebook, Instagram, Youtube } from 'lucide-react';
 
 export default function ContactsPage() {
+  const { addApplication, trackPageView } = useData();
   const [formData, setFormData] = useState({
     name: '',
     phone: '',
     message: ''
   });
-
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [openFaq, setOpenFaq] = useState(null);
+
+  useEffect(() => {
+    trackPageView('Контакты');
+  }, [trackPageView]);
 
   const handleInputChange = (e) => {
     setFormData({
@@ -19,11 +25,33 @@ export default function ContactsPage() {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('Form submitted:', formData);
-    alert('Спасибо! Ваше сообщение отправлено. Мы свяжемся с вами в ближайшее время.');
-    setFormData({ name: '', phone: '', message: '' });
+    setIsSubmitting(true);
+
+    // Создаем заявку
+    const applicationData = {
+      name: formData.name,
+      phone: formData.phone,
+      email: '', // Пока нет email в форме
+      message: formData.message,
+      apartmentId: null,
+      apartmentNumber: null,
+      projectName: 'Общий вопрос',
+      source: 'Контактная форма'
+    };
+
+    try {
+      const newApplication = addApplication(applicationData);
+      if (newApplication) {
+        alert('Спасибо! Ваше сообщение отправлено. Мы свяжемся с вами в ближайшее время.');
+        setFormData({ name: '', phone: '', message: '' });
+      }
+    } catch (error) {
+      alert('Произошла ошибка при отправке сообщения. Попробуйте еще раз.');
+    }
+
+    setIsSubmitting(false);
   };
 
   const faqItems = [
@@ -156,6 +184,7 @@ export default function ContactsPage() {
                     required
                     className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-accent focus:border-accent transition-colors"
                     placeholder="Введите ваше имя"
+                    disabled={isSubmitting}
                   />
                 </div>
 
@@ -172,6 +201,7 @@ export default function ContactsPage() {
                     required
                     className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-accent focus:border-accent transition-colors"
                     placeholder="+7 (___) ___-__-__"
+                    disabled={isSubmitting}
                   />
                 </div>
 
@@ -188,17 +218,34 @@ export default function ContactsPage() {
                     rows="5"
                     className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-accent focus:border-accent transition-colors resize-none"
                     placeholder="Расскажите, что вас интересует..."
+                    disabled={isSubmitting}
                   ></textarea>
                 </div>
 
                 <button
                   type="submit"
-                  className="w-full bg-accent hover:bg-accent-600 text-white px-6 py-3 rounded-lg font-semibold text-lg transition-colors flex items-center justify-center"
+                  disabled={isSubmitting}
+                  className="w-full bg-accent hover:bg-accent-600 text-white px-6 py-3 rounded-lg font-semibold text-lg transition-colors flex items-center justify-center disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                  <Send className="w-5 h-5 mr-2" />
-                  Отправить сообщение
+                  {isSubmitting ? (
+                    <>
+                      <div className="spinner w-5 h-5 mr-2"></div>
+                      Отправляется...
+                    </>
+                  ) : (
+                    <>
+                      <Send className="w-5 h-5 mr-2" />
+                      Отправить сообщение
+                    </>
+                  )}
                 </button>
               </form>
+
+              <div className="mt-6 p-4 bg-blue-50 rounded-lg">
+                <p className="text-sm text-blue-800">
+                  <strong>Конфиденциальность:</strong> Ваши персональные данные защищены и не передаются третьим лицам.
+                </p>
+              </div>
             </div>
           </div>
         </div>
