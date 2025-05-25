@@ -5,6 +5,7 @@ import ApartmentsPage from './pages/ApartmentsPage';
 import ApartmentDetailPage from './pages/ApartmentDetailPage';
 import AboutPage from './pages/AboutPage';
 import ContactsPage from './pages/ContactsPage';
+import AdminPage from './pages/AdminPage';
 import './App.css';
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
           <Route path="/apartments/:id" element={<ApartmentDetailPage />} />
           <Route path="/about" element={<AboutPage />} />
           <Route path="/contacts" element={<ContactsPage />} />
+          <Route path="/admin" element={<AdminPage />} />
         </Routes>
       </div>
     </Router>
