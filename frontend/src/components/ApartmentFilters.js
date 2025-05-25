@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { projectsData } from '../data/projectsData';
+import { useData } from '../context/DataContext';
 
 export default function ApartmentFilters({ filters, setFilters }) {
+  const { projects } = useData();
   const [localFilters, setLocalFilters] = useState(filters);
 
   const handleRoomsChange = (rooms) => {
@@ -145,11 +146,44 @@ export default function ApartmentFilters({ filters, setFilters }) {
         </div>
       </div>
 
+      {/* Floor Range */}
+      <div className="mb-6">
+        <h4 className="font-semibold text-primary-900 mb-3">
+          Этаж: {localFilters.floorRange[0]} - {localFilters.floorRange[1]}
+        </h4>
+        <div className="space-y-4">
+          <div>
+            <label className="text-sm text-gray-600">Минимальный этаж</label>
+            <input
+              type="range"
+              min="1"
+              max="20"
+              step="1"
+              value={localFilters.floorRange[0]}
+              onChange={(e) => handleRangeChange('floorRange', [parseInt(e.target.value), localFilters.floorRange[1]])}
+              className="w-full mt-2 accent-accent"
+            />
+          </div>
+          <div>
+            <label className="text-sm text-gray-600">Максимальный этаж</label>
+            <input
+              type="range"
+              min="1"
+              max="20"
+              step="1"
+              value={localFilters.floorRange[1]}
+              onChange={(e) => handleRangeChange('floorRange', [localFilters.floorRange[0], parseInt(e.target.value)])}
+              className="w-full mt-2 accent-accent"
+            />
+          </div>
+        </div>
+      </div>
+
       {/* Project Filter */}
       <div className="mb-6">
         <h4 className="font-semibold text-primary-900 mb-3">Жилой комплекс</h4>
         <div className="space-y-2">
-          {projectsData.map((project) => (
+          {projects.map((project) => (
             <button
               key={project.id}
               onClick={() => handleProjectChange(project.id)}
