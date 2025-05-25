@@ -98,7 +98,12 @@ export default function Footer() {
             
             <div className="text-white/60 text-center md:text-right">
               <p>&copy; 2024 GRAND Construction. Все права защищены.</p>
-              <p className="text-sm mt-1">Лицензия на строительную деятельность №12345</p>
+              <p className="text-sm mt-1">
+                Лицензия на строительную деятельность №12345 |{' '}
+                <Link to="/admin" className="text-accent hover:text-accent-600 transition-colors">
+                  Администрирование
+                </Link>
+              </p>
             </div>
           </div>
         </div>
