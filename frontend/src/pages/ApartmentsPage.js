@@ -1,13 +1,14 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import { Search, Filter, SlidersHorizontal, Grid, List } from 'lucide-react';
+import { useData } from '../context/DataContext';
 import Navigation from '../components/Navigation';
 import Footer from '../components/Footer';
 import ApartmentCard from '../components/ApartmentCard';
 import ApartmentFilters from '../components/ApartmentFilters';
 import MortgageCalculator from '../components/MortgageCalculator';
-import { apartmentsData } from '../data/projectsData';
 
 export default function ApartmentsPage() {
+  const { apartments, trackPageView } = useData();
   const [filters, setFilters] = useState({
     rooms: [],
     priceRange: [20000000, 60000000],
@@ -20,9 +21,16 @@ export default function ApartmentsPage() {
   const [showFilters, setShowFilters] = useState(false);
   const [showCalculator, setShowCalculator] = useState(false);
 
+  useEffect(() => {
+    trackPageView('Каталог квартир');
+  }, [trackPageView]);
+
   // Filter and sort apartments
   const filteredApartments = useMemo(() => {
-    let filtered = apartmentsData.filter(apartment => {
+    let filtered = apartments.filter(apartment => {
+      // Показываем только доступные квартиры
+      if (apartment.available === false) return false;
+      
       // Room filter
       if (filters.rooms.length > 0 && !filters.rooms.includes(apartment.rooms)) {
         return false;
@@ -68,7 +76,7 @@ export default function ApartmentsPage() {
       default:
         return filtered;
     }
-  }, [apartmentsData, filters, sortBy]);
+  }, [apartments, filters, sortBy]);
 
   return (
     <div className="min-h-screen bg-neutral-light">
@@ -82,7 +90,7 @@ export default function ApartmentsPage() {
               Каталог квартир
             </h1>
             <p className="text-xl max-w-3xl mx-auto">
-              Выберите идеальную квартиру из {apartmentsData.length} предложений в наших жилых комплексах
+              Выберите идеальную квартиру из {apartments.filter(a => a.available !== false).length} предложений в наших жилых комплексах
             </p>
           </div>
         </div>
