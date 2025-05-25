@@ -87,7 +87,6 @@ export default function ProjectsManager() {
         </button>
       </div>
 
-      {/* Статистика проектов */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         <div className="bg-white rounded-lg shadow p-4">
           <div className="flex items-center">
