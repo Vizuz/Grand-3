@@ -19,6 +19,10 @@ export const DataProvider = ({ children }) => {
 
   // Загрузка данных при инициализации
   useEffect(() => {
+    // Принудительно сбрасываем данные к начальным если их нет
+    if (!localStorage.getItem('grand_projects') || JSON.parse(localStorage.getItem('grand_projects')).length === 0) {
+      dataService.resetToDefaults();
+    }
     loadData();
     trackVisitor();
   }, []);
