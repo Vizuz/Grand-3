@@ -10,7 +10,7 @@ import dataService from '../services/dataService';
 
 export const DataContext = createContext();
 
-const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:8000/api';
+const API_URL = process.env.REACT_APP_API_URL || 'https://grand-3.onrender.com/api' || 'http://localhost:8000/api';
 
 // Удобный хук вместо прямого useContext(DataContext)
 export const useData = () => useContext(DataContext);
