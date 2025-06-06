@@ -14,7 +14,7 @@ import { useData } from '../context/DataContext';
 import Navigation from '../components/Navigation';
 import Footer from '../components/Footer';
 
-const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:8000/api';
+const API_URL = process.env.REACT_APP_API_URL || 'https://grand-3.onrender.com/api' ||'http://localhost:8000/api';
 
 export default function ContactsPage() {
   const { trackPageView, addApplication } = useData();
