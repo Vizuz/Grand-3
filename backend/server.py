@@ -25,6 +25,11 @@ app = FastAPI()
 # Create a router with the /api prefix
 api_router = APIRouter(prefix="/api")
 
+origins=[
+    "http://localhost:3000",
+    "https://papaya-marshmallow-b54506.netlify.app",
+    
+]
 
 # Define Models
 class StatusCheck(BaseModel):
@@ -122,7 +127,7 @@ app.include_router(apartments_router)
 app.add_middleware(
     CORSMiddleware,
     allow_credentials=True,
-    allow_origins=["http://localhost:3000"],
+    allow_origins= origins,
     allow_methods=["*"],
     allow_headers=["*"],
 )
