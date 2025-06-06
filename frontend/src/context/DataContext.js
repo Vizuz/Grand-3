@@ -1,168 +1,143 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import React, {
+  createContext,
+  useState,
+  useEffect,
+  useCallback,
+  useContext,
+  useMemo
+} from 'react';
 import dataService from '../services/dataService';
 
-const DataContext = createContext();
+export const DataContext = createContext();
 
-export const useData = () => {
-  const context = useContext(DataContext);
-  if (!context) {
-    throw new Error('useData must be used within DataProvider');
-  }
-  return context;
-};
+const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:8000/api';
+
+// Удобный хук вместо прямого useContext(DataContext)
+export const useData = () => useContext(DataContext);
 
 export const DataProvider = ({ children }) => {
-  const [projects, setProjects] = useState([]);
-  const [apartments, setApartments] = useState([]);
+  /* ---- Заявки из Mongo ---- */
   const [applications, setApplications] = useState([]);
-  const [analytics, setAnalytics] = useState({});
+  const [apartments, setApartments] = useState([]);
 
-  // Загрузка данных при инициализации
-  useEffect(() => {
-    // Принудительно сбрасываем данные к начальным если их нет
-    if (!localStorage.getItem('grand_projects') || JSON.parse(localStorage.getItem('grand_projects')).length === 0) {
-      dataService.resetToDefaults();
+  // ======= Applications CRUD =======
+  const fetchApplications = useCallback(async () => {
+    try {
+      const res = await fetch(`${API_URL}/applications`);
+      if (!res.ok) throw new Error('Network response was not ok');
+      const data = await res.json();
+      setApplications(data);
+    } catch (err) {
+      console.error('Failed to fetch applications:', err);
     }
-    loadData();
-    trackVisitor();
   }, []);
 
-  const loadData = () => {
-    setProjects(dataService.getProjects());
-    setApartments(dataService.getApartments());
-    setApplications(dataService.getApplications());
-    setAnalytics(dataService.getAnalytics());
+  useEffect(() => {
+    fetchApplications();
+  }, [fetchApplications]);
+
+  const addApplication = (application) => {
+    setApplications((prev) => [application, ...prev]);
   };
 
-  const trackVisitor = () => {
-    dataService.trackVisitor();
-  };
-
-  const trackPageView = (page) => {
-    dataService.trackPageView(page);
-  };
-
-  const trackApartmentView = (apartmentId) => {
-    dataService.trackApartmentView(apartmentId);
-  };
-
-  // ПРОЕКТЫ
-  const addProject = (projectData) => {
-    const newProject = dataService.addProject(projectData);
-    setProjects(dataService.getProjects());
-    return newProject;
-  };
-
-  const updateProject = (id, projectData) => {
-    const updatedProject = dataService.updateProject(id, projectData);
-    if (updatedProject) {
-      setProjects(dataService.getProjects());
-      setApartments(dataService.getApartments()); // Обновляем квартиры тоже
+  // ======= Apartments CRUD =======
+  const fetchApartments = useCallback(async () => {
+    try {
+      const res = await fetch(`${API_URL}/apartments`);
+      if (!res.ok) throw new Error('Network response was not ok');
+      const data = await res.json();
+      setApartments(data);
+    } catch (err) {
+      console.error('Failed to fetch apartments:', err);
     }
-    return updatedProject;
-  };
+  }, []);
 
-  const deleteProject = (id) => {
-    const success = dataService.deleteProject(id);
-    if (success) {
-      setProjects(dataService.getProjects());
-      setApartments(dataService.getApartments());
+  useEffect(() => {
+    fetchApartments();
+  }, [fetchApartments]);
+
+  const addApartment = async (apartment) => {
+    try {
+      const res = await fetch(`${API_URL}/apartments`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(apartment)
+      });
+      if (!res.ok) throw new Error('Network response was not ok');
+      const data = await res.json();
+      setApartments((prev) => [data, ...prev]);
+      return data;
+    } catch (err) {
+      console.error('Failed to add apartment:', err);
+      throw err;
     }
-    return success;
   };
 
-  // КВАРТИРЫ
-  const addApartment = (apartmentData) => {
-    const newApartment = dataService.addApartment(apartmentData);
-    setApartments(dataService.getApartments());
-    return newApartment;
-  };
-
-  const updateApartment = (id, apartmentData) => {
-    const updatedApartment = dataService.updateApartment(id, apartmentData);
-    if (updatedApartment) {
-      setApartments(dataService.getApartments());
+  const updateApartment = async (id, apartment) => {
+    try {
+      const res = await fetch(`${API_URL}/apartments/${id}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(apartment)
+      });
+      if (!res.ok) throw new Error('Network response was not ok');
+      const data = await res.json();
+      setApartments((prev) =>
+        prev.map((a) => (a.id === id ? data : a))
+      );
+      return data;
+    } catch (err) {
+      console.error('Failed to update apartment:', err);
+      throw err;
     }
-    return updatedApartment;
   };
 
-  const deleteApartment = (id) => {
-    const success = dataService.deleteApartment(id);
-    if (success) {
-      setApartments(dataService.getApartments());
+  const deleteApartment = async (id) => {
+    try {
+      const res = await fetch(`${API_URL}/apartments/${id}`, {
+        method: 'DELETE'
+      });
+      if (!res.ok) throw new Error('Network response was not ok');
+      setApartments((prev) => prev.filter((a) => a.id !== id));
+    } catch (err) {
+      console.error('Failed to delete apartment:', err);
+      throw err;
     }
-    return success;
   };
 
-  // ЗАЯВКИ
-  const addApplication = (applicationData) => {
-    const newApplication = dataService.addApplication(applicationData);
-    setApplications(dataService.getApplications());
-    setAnalytics(dataService.getAnalytics());
-    return newApplication;
+  // ============================
+  // Остальные методы dataService, проекты и т.п.
+  const bindServiceMethods = () => {
+    const proto = Object.getPrototypeOf(dataService);
+    const methods = {};
+    Object.getOwnPropertyNames(proto).forEach((k) => {
+      if (k !== 'constructor' && typeof dataService[k] === 'function') {
+        methods[k] = dataService[k].bind(dataService);
+      }
+    });
+    return methods;
   };
 
-  const updateApplicationStatus = (id, status) => {
-    const updatedApplication = dataService.updateApplicationStatus(id, status);
-    if (updatedApplication) {
-      setApplications(dataService.getApplications());
-      setAnalytics(dataService.getAnalytics());
-    }
-    return updatedApplication;
-  };
+  const serviceMethods = useMemo(bindServiceMethods, []);
 
-  const deleteApplication = (id) => {
-    const success = dataService.deleteApplication(id);
-    if (success) {
-      setApplications(dataService.getApplications());
-    }
-    return success;
-  };
+  const contextValue = useMemo(() => {
+    const projects = dataService.getProjects();
 
-  // АНАЛИТИКА
-  const getAdminStats = () => {
-    return dataService.getAdminStats();
-  };
-
-  const getDetailedAnalytics = () => {
-    return dataService.getDetailedAnalytics();
-  };
-
-  const value = {
-    // Данные
-    projects,
-    apartments,
-    applications,
-    analytics,
-    
-    // Методы проектов
-    addProject,
-    updateProject,
-    deleteProject,
-    
-    // Методы квартир
-    addApartment,
-    updateApartment,
-    deleteApartment,
-    
-    // Методы заявок
-    addApplication,
-    updateApplicationStatus,
-    deleteApplication,
-    
-    // Аналитика
-    trackPageView,
-    trackApartmentView,
-    getAdminStats,
-    getDetailedAnalytics,
-    
-    // Обновление
-    loadData
-  };
+    return {
+      ...serviceMethods, // trackPageView и др.
+      projects,
+      apartments,           // теперь реальные данные из MongoDB
+      applications,
+      addApplication,
+      refreshApplications: fetchApplications,
+      refreshApartments: fetchApartments,
+      addApartment,
+      updateApartment,
+      deleteApartment
+    };
+  }, [applications, apartments, serviceMethods, fetchApplications, fetchApartments]);
 
   return (
-    <DataContext.Provider value={value}>
-      {children}
-    </DataContext.Provider>
+    <DataContext.Provider value={contextValue}>{children}</DataContext.Provider>
   );
 };

@@ -1,3 +1,7 @@
+# Dockerfile для Python окружения:
+# - Устанавливаются необходимые системные зависимости и Playwright.
+# - Настроено виртуальное окружение и code-server.
+
 FROM python:3.11-slim
 
 ARG GITHUB_TOKEN

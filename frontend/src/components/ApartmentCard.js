@@ -23,7 +23,7 @@ export default function ApartmentCard({ apartment, viewMode = 'grid' }) {
         <div className="flex flex-col md:flex-row">
           <div className="md:w-80 h-48 md:h-auto relative">
             <img
-              src={apartment.photos[0]}
+              src={apartment.photos && apartment.photos[0] ? apartment.photos[0] : '/placeholder.jpg'}
               alt={`Квартира №${apartment.number}`}
               className="w-full h-full object-cover"
             />
@@ -104,7 +104,7 @@ export default function ApartmentCard({ apartment, viewMode = 'grid' }) {
     <div className="bg-white rounded-lg shadow-lg overflow-hidden hover-lift">
       <div className="relative h-48">
         <img
-          src={apartment.photos[0]}
+          src={apartment.photos && apartment.photos[0] ? apartment.photos[0] : '/placeholder.jpg'}
           alt={`Квартира №${apartment.number}`}
           className="w-full h-full object-cover"
         />
@@ -166,7 +166,7 @@ export default function ApartmentCard({ apartment, viewMode = 'grid' }) {
         
         <Link
           to={`/apartments/${apartment.id}`}
-          className="block w-full bg-accent hover:bg-accent-600 text-white text-center px-4 py-2 rounded-lg font-semibold transition-colors"
+          className="block w-full bg-accent hover:bg-accent-600 text-black text-center px-4 py-2 rounded-lg font-semibold transition-colors"
         >
           Подробнее
         </Link>

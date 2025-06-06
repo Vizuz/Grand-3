@@ -1,3 +1,7 @@
+# Dockerfile для окружения с Java 17 и сборкой Python 3.11 из исходников:
+# - Устанавливаются системные зависимости, OpenJDK и Python.
+# - Настраивается code-server.
+
 FROM openjdk:17-slim
 
 # Set environment variables

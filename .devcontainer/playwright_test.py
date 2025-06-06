@@ -4,6 +4,9 @@ import argparse
 from datetime import datetime
 import os
 
+# Этот файл запускает асинхронный тест с использованием Playwright:
+# - Захватывает скриншот страницы с заданным URL.
+# - При указанном флаге сохраняет логи консоли.
 
 async def capture_page(url: str, output_dir: str = "screenshots", capture_logs: bool = False):
     """

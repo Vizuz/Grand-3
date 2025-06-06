@@ -22,15 +22,24 @@ body {
 }
 
 .luxury-gradient {
-  background: linear-gradient(135deg, #242f3c 0%, #334e68 50%, #242f3c 100%);
+  
+  background-color: #242f3c;
 }
+.luxury-gradient-bg {
+  background-image: url("../public/img/bg.PNG");
+  background-size: cover;
+  background-position: center;
+  background-color: #242f3c;
+}
+
+
 
 .gold-gradient {
   background: linear-gradient(135deg, #D4AF37 0%, #f1d276 50%, #D4AF37 100%);
 }
 
 .text-gradient {
-  background: linear-gradient(135deg, #D4AF37, #f1d276);
+  background: white;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -57,18 +66,16 @@ body {
 
 /* Custom scrollbar */
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 5px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #f1f1f1;
+  background: #242f3c;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #D4AF37;
-  border-radius: 4px;
+  background: #768e9a;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #b8952f;
 }

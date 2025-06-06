@@ -11,9 +11,9 @@ export default function ApartmentsPage() {
   const { apartments, trackPageView } = useData();
   const [filters, setFilters] = useState({
     rooms: [],
-    priceRange: [20000000, 60000000],
-    areaRange: [40, 100],
-    floorRange: [1, 20],
+    priceRange: [100000, 60000000],
+    areaRange: [1, 10000],
+    floorRange: [1, 2000],
     projectId: null
   });
   const [sortBy, setSortBy] = useState('price-asc');

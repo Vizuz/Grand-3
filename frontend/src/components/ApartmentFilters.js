@@ -1,30 +1,44 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import { useData } from '../context/DataContext';
+import Slider from 'rc-slider';
+import 'rc-slider/assets/index.css';
 
 export default function ApartmentFilters({ filters, setFilters }) {
-  const { projects } = useData();
+  const { apartments = [], projects = [] } = useData();
   const [localFilters, setLocalFilters] = useState(filters);
+
+  // Собираем min/max для динамики
+  const priceValues = useMemo(() => apartments.map(a => a.price), [apartments]);
+  const areaValues = useMemo(() => apartments.map(a => a.area), [apartments]);
+  const floorValues = useMemo(() => apartments.map(a => a.floor), [apartments]);
+  const roomsValues = useMemo(() => [...new Set(apartments.map(a => a.rooms))].sort((a, b) => a - b), [apartments]);
+
+  const priceMin = priceValues.length ? Math.min(...priceValues) : 0;
+  const priceMax = priceValues.length ? Math.max(...priceValues) : 100_000_000;
+  const areaMin = areaValues.length ? Math.min(...areaValues) : 1;
+  const areaMax = areaValues.length ? Math.max(...areaValues) : 500;
+  const floorMin = floorValues.length ? Math.min(...floorValues) : 1;
+  const floorMax = floorValues.length ? Math.max(...floorValues) : 50;
+
+  const handleRangeChange = (type, values) => {
+    const updated = { ...localFilters, [type]: values };
+    setLocalFilters(updated);
+    setFilters(updated);
+  };
 
   const handleRoomsChange = (rooms) => {
     const newRooms = localFilters.rooms.includes(rooms)
       ? localFilters.rooms.filter(r => r !== rooms)
       : [...localFilters.rooms, rooms];
-    
     const newFilters = { ...localFilters, rooms: newRooms };
     setLocalFilters(newFilters);
     setFilters(newFilters);
   };
 
-  const handleRangeChange = (type, value) => {
-    const newFilters = { ...localFilters, [type]: value };
-    setLocalFilters(newFilters);
-    setFilters(newFilters);
-  };
-
   const handleProjectChange = (projectId) => {
-    const newFilters = { 
-      ...localFilters, 
-      projectId: projectId === localFilters.projectId ? null : projectId 
+    const newFilters = {
+      ...localFilters,
+      projectId: projectId === localFilters.projectId ? null : projectId
     };
     setLocalFilters(newFilters);
     setFilters(newFilters);
@@ -33,9 +47,9 @@ export default function ApartmentFilters({ filters, setFilters }) {
   const resetFilters = () => {
     const defaultFilters = {
       rooms: [],
-      priceRange: [20000000, 60000000],
-      areaRange: [40, 100],
-      floorRange: [1, 20],
+      priceRange: [priceMin, priceMax],
+      areaRange: [areaMin, areaMax],
+      floorRange: [floorMin, floorMax],
       projectId: null
     };
     setLocalFilters(defaultFilters);
@@ -43,9 +57,10 @@ export default function ApartmentFilters({ filters, setFilters }) {
   };
 
   const formatPrice = (price) => {
-    return new Intl.NumberFormat('ru-RU', {
-      minimumFractionDigits: 0,
-    }).format(price / 1000000) + ' млн ₸';
+    if (price >= 1_000_000) {
+      return (price / 1_000_000).toLocaleString('ru-RU', { maximumFractionDigits: 1 }) + ' млн ₸';
+    }
+    return price.toLocaleString('ru-RU') + ' ₸';
   };
 
   return (
@@ -64,7 +79,7 @@ export default function ApartmentFilters({ filters, setFilters }) {
       <div className="mb-6">
         <h4 className="font-semibold text-primary-900 mb-3">Количество комнат</h4>
         <div className="flex flex-wrap gap-2">
-          {[1, 2, 3, 4].map((rooms) => (
+          {roomsValues.map((rooms) => (
             <button
               key={rooms}
               onClick={() => handleRoomsChange(rooms)}
@@ -80,103 +95,70 @@ export default function ApartmentFilters({ filters, setFilters }) {
         </div>
       </div>
 
-      {/* Price Range */}
+      {/* Цена */}
       <div className="mb-6">
         <h4 className="font-semibold text-primary-900 mb-3">
-          Цена: {formatPrice(localFilters.priceRange[0])} - {formatPrice(localFilters.priceRange[1])}
+          Цена: {formatPrice(localFilters.priceRange[0])} — {formatPrice(localFilters.priceRange[1])}
         </h4>
-        <div className="space-y-4">
-          <div>
-            <label className="text-sm text-gray-600">Минимальная цена</label>
-            <input
-              type="range"
-              min="20000000"
-              max="60000000"
-              step="1000000"
-              value={localFilters.priceRange[0]}
-              onChange={(e) => handleRangeChange('priceRange', [parseInt(e.target.value), localFilters.priceRange[1]])}
-              className="w-full mt-2 accent-accent"
-            />
-          </div>
-          <div>
-            <label className="text-sm text-gray-600">Максимальная цена</label>
-            <input
-              type="range"
-              min="20000000"
-              max="60000000"
-              step="1000000"
-              value={localFilters.priceRange[1]}
-              onChange={(e) => handleRangeChange('priceRange', [localFilters.priceRange[0], parseInt(e.target.value)])}
-              className="w-full mt-2 accent-accent"
-            />
-          </div>
-        </div>
+        <Slider
+          range
+          min={priceMin}
+          max={priceMax}
+          step={100000}
+          value={localFilters.priceRange}
+          onChange={vals => handleRangeChange('priceRange', vals)}
+          allowCross={false}
+          railStyle={{ backgroundColor: "#f1f5f9", height: 6 }}
+          trackStyle={[{ backgroundColor: "#ea9600", height: 6 }]}
+          handleStyle={[
+            { borderColor: "#ea9600", backgroundColor: "#fff", height: 20, width: 20 },
+            { borderColor: "#ea9600", backgroundColor: "#fff", height: 20, width: 20 }
+          ]}
+        />
       </div>
 
-      {/* Area Range */}
+      {/* Площадь */}
       <div className="mb-6">
         <h4 className="font-semibold text-primary-900 mb-3">
-          Площадь: {localFilters.areaRange[0]} - {localFilters.areaRange[1]} м²
+          Площадь: {localFilters.areaRange[0]} — {localFilters.areaRange[1]} м²
         </h4>
-        <div className="space-y-4">
-          <div>
-            <label className="text-sm text-gray-600">Минимальная площадь</label>
-            <input
-              type="range"
-              min="40"
-              max="120"
-              step="5"
-              value={localFilters.areaRange[0]}
-              onChange={(e) => handleRangeChange('areaRange', [parseInt(e.target.value), localFilters.areaRange[1]])}
-              className="w-full mt-2 accent-accent"
-            />
-          </div>
-          <div>
-            <label className="text-sm text-gray-600">Максимальная площадь</label>
-            <input
-              type="range"
-              min="40"
-              max="120"
-              step="5"
-              value={localFilters.areaRange[1]}
-              onChange={(e) => handleRangeChange('areaRange', [localFilters.areaRange[0], parseInt(e.target.value)])}
-              className="w-full mt-2 accent-accent"
-            />
-          </div>
-        </div>
+        <Slider
+          range
+          min={areaMin}
+          max={areaMax}
+          step={1}
+          value={localFilters.areaRange}
+          onChange={vals => handleRangeChange('areaRange', vals)}
+          allowCross={false}
+          railStyle={{ backgroundColor: "#f1f5f9", height: 6 }}
+          trackStyle={[{ backgroundColor: "#ea9600", height: 6 }]}
+          handleStyle={[
+            { borderColor: "#ea9600", backgroundColor: "#fff", height: 20, width: 20 },
+            { borderColor: "#ea9600", backgroundColor: "#fff", height: 20, width: 20 }
+          ]}
+        />
       </div>
 
-      {/* Floor Range */}
+      {/* Этаж */}
       <div className="mb-6">
         <h4 className="font-semibold text-primary-900 mb-3">
-          Этаж: {localFilters.floorRange[0]} - {localFilters.floorRange[1]}
+          Этаж: {localFilters.floorRange[0]} — {localFilters.floorRange[1]}
         </h4>
-        <div className="space-y-4">
-          <div>
-            <label className="text-sm text-gray-600">Минимальный этаж</label>
-            <input
-              type="range"
-              min="1"
-              max="20"
-              step="1"
-              value={localFilters.floorRange[0]}
-              onChange={(e) => handleRangeChange('floorRange', [parseInt(e.target.value), localFilters.floorRange[1]])}
-              className="w-full mt-2 accent-accent"
-            />
-          </div>
-          <div>
-            <label className="text-sm text-gray-600">Максимальный этаж</label>
-            <input
-              type="range"
-              min="1"
-              max="20"
-              step="1"
-              value={localFilters.floorRange[1]}
-              onChange={(e) => handleRangeChange('floorRange', [localFilters.floorRange[0], parseInt(e.target.value)])}
-              className="w-full mt-2 accent-accent"
-            />
-          </div>
-        </div>
+        <Slider
+          range
+          min={floorMin}
+          max={floorMax}
+          step={1}
+          value={localFilters.floorRange}
+          onChange={vals => handleRangeChange('floorRange', vals)}
+          allowCross={false}
+          railStyle={{ backgroundColor: "#f1f5f9", height: 6 }}
+          trackStyle={[{ backgroundColor: "#ea9600", height: 6 }]}
+          handleStyle={[
+            { borderColor: "#ea9600", backgroundColor: "#fff", height: 20, width: 20 },
+            { borderColor: "#ea9600", backgroundColor: "#fff", height: 20, width: 20 }
+          ]}
+        />
       </div>
 
       {/* Project Filter */}
