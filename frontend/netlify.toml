@@ -1,0 +1,11 @@
+[build]
+  command = "npm run build"
+  publish = "build"
+
+[dev]
+  command    = "npm run dev"   
+  targetPort = 3000
+  port       = 8888
+  framework = "create-react-app"
+  experimental_edge_handlers = false
+

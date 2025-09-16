@@ -1,0 +1,98 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap');
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  color: #333333;
+  background: #F5F5F5;
+  font-family: 'Inter';
+  line-height: 1.6;
+}
+
+.luxury-gradient {
+  background-color: #1a3d76;
+/* #242f3c */
+}
+.luxury-gradient-bg {
+  background-image: url("https://storage.yandexcloud.net/vizuz/bg.webp");
+  background-size: cover;
+  background-position: center;
+  background-color: #1a3d76;
+}
+
+
+
+.gold-gradient {
+  background: linear-gradient(135deg, #D4AF37 0%, #f1d276 50%, #D4AF37 100%);
+}
+
+.text-gradient {
+  background: white;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.glass-effect {
+  backdrop-filter: blur(10px);
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.shadow-luxury {
+  box-shadow: 0 20px 40px rgba(36, 47, 60, 0.1), 0 1px 3px rgba(36, 47, 60, 0.08);
+}
+
+.hover-lift {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.hover-lift:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 25px 50px rgba(36, 47, 60, 0.15);
+}
+
+#map-container a[href*="2gis.ru"] {      /* «Открыть в 2 ГИС» */
+  display: none !important;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #242f3c;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #768e9a;
+}
+
+::-webkit-scrollbar-thumb:hover {
+}
+
+
+@keyframes slide-lines {
+  to {
+    transform: translateY(100%);
+  }
+}
+
+/* Привяжем анимацию к классу */
+.animate-slide-lines {
+  animation: slide-lines 0.8s ease-in-out forwards;
+}

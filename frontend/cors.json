@@ -1,0 +1,11 @@
+[{
+  "allowedOrigins": [
+    "http://localhost:8888",
+    "https://papaya-marshmallow-b54506.netlify.app",
+    "https://grandkomfortstroy.kz"
+  ],
+  "allowedMethods": ["GET", "PUT", "POST", "DELETE", "OPTIONS"],
+  "allowedHeaders": ["*"],
+  "exposeHeaders": ["*"],
+  "maxAgeSeconds": 3600
+}]
