@@ -65,9 +65,7 @@ export default function ApartmentsManager() {
       }
       setFormData(fd => ({
         ...fd,
-        images: Array.isArray(fd.images)
-          ? [...fd.images, ...uploadedUrls]
-          : uploadedUrls
+        images: [...(Array.isArray(fd.images) ? fd.images : fd.images ? fd.images.split(',').map(p => p.trim()) : []), ...uploadedUrls]
       }));
     } catch (err) {
       console.error(err);
@@ -89,9 +87,11 @@ export default function ApartmentsManager() {
       floor: parseInt(formData.floor),
       totalFloors: parseInt(formData.totalFloors),
       price: parseInt(formData.price),
-      images: formData.images
-        ? formData.images.split(',').map(p => p.trim()).filter(Boolean)
-        : [],
+      images: Array.isArray(formData.images)
+        ? formData.images
+        : (formData.images
+            ? formData.images.split(',').map(p => p.trim()).filter(Boolean)
+            : []),
       description: formData.description,
       features: formData.features
         ? formData.features.split(',').map(f => f.trim()).filter(Boolean)
