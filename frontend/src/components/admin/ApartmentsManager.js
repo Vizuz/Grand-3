@@ -52,7 +52,7 @@ export default function ApartmentsManager() {
         const formDataUpload = new FormData();
         formDataUpload.append("file", file);
 
-        const res = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/upload-image`, {
+        const res = await fetch(`${process.env.REACT_APP_BACKEND_URL}/upload-image`, {
           method: "POST",
           body: formDataUpload,
         });
