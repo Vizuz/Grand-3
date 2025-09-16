@@ -120,7 +120,6 @@ async def get_applications():
 async def create_application(application: Application):
     await db.applications.insert_one(application.dict())
     # Отправка уведомления в Telegram
-    import httpx
     message = f"""
 📩 Новая заявка!
 👤 Имя: {application.name}
@@ -164,14 +163,15 @@ async def delete_application(app_id: str):
     return {"ok": True}
 
 
+
 # ─── ROUTE: Upload Image to Yandex Object Storage ───────────────────────────────
 
 @api.post("/upload-image")
 async def upload_image(file: UploadFile = File(...)):
     try:
-        file_name = f"apartments/{file.filename}"
-        s3.upload_fileobj(file.file, BUCKET_NAME, file_name, ExtraArgs={"ACL": "public-read"})
-        url = f"{ENDPOINT_URL}/{BUCKET_NAME}/{file_name}"
+        key = f"apartments/{uuid.uuid4()}_{file.filename}"
+        s3.upload_fileobj(file.file, BUCKET_NAME, key, ExtraArgs={"ACL": "public-read", "ContentType": file.content_type})
+        url = f"{ENDPOINT_URL}/{BUCKET_NAME}/{key}"
         return {"url": url}
     except Exception as e:
         logging.exception("Ошибка загрузки в Yandex Object Storage")

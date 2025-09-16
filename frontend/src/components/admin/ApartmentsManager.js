@@ -52,7 +52,7 @@ export default function ApartmentsManager() {
         const formDataUpload = new FormData();
         formDataUpload.append("file", file);
 
-        const res = await fetch(`${process.env.REACT_APP_API_URL}/upload-image`, {
+        const res = await fetch(`${process.env.REACT_APP_API_URL}/api/upload-image`, {
           method: "POST",
           body: formDataUpload,
         });
@@ -65,9 +65,9 @@ export default function ApartmentsManager() {
       }
       setFormData(fd => ({
         ...fd,
-        images: fd.images
-          ? fd.images + ", " + uploadedUrls.join(", ")
-          : uploadedUrls.join(", ")
+        images: Array.isArray(fd.images)
+          ? [...fd.images, ...uploadedUrls]
+          : uploadedUrls
       }));
     } catch (err) {
       console.error(err);
@@ -254,7 +254,7 @@ export default function ApartmentsManager() {
               <label className="block text-sm font-medium text-gray-700 mb-1">Фотографии (URL через запятую)</label>
               <input
                 type="text"
-                value={formData.images}
+                value={Array.isArray(formData.images) ? formData.images.join(', ') : formData.images}
                 onChange={e => setFormData({ ...formData, images: e.target.value })}
                 className="w-full border border-gray-300 rounded-lg px-3 py-2"
                 placeholder="https://example.com/photo1.jpg, https://example.com/photo2.jpg"
