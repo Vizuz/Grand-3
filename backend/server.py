@@ -79,7 +79,7 @@ class Application(BaseModel):
 
 class Apartment(BaseModel):
     id: str = Field(default_factory=lambda: str(uuid.uuid4()))
-    number: Optional[int] = None  
+    # number: Optional[int] = None  
     project: str
     area: float
     floor: int
@@ -89,7 +89,7 @@ class Apartment(BaseModel):
     description: Optional[str] = None 
     features: Optional[List[str]] = []
     rooms: int
-    available: bool = True
+    # available: bool = True
 
     class Config:
         extra = "ignore"

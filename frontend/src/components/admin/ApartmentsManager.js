@@ -429,7 +429,6 @@ export default function ApartmentsManager() {
                   }
                   className="w-full border border-gray-300 rounded-lg px-3 py-2"
                   rows="3"
-                  required
                 />
               </div>
               <div>
