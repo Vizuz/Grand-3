@@ -145,9 +145,9 @@ export default function ApartmentCard({ apartment, viewMode = "grid" }) {
         {/* Верхняя часть */}
         <div>
           <div className="mb-4">
-            <h3 className="text-lg font-bold text-primary-900 mb-1">
+            {/* <h3 className="text-lg font-bold text-primary-900 mb-1">
               Квартира №{apartment.number}
-            </h3>
+            </h3> */}
             <p className="text-accent text-sm">{apartment.projectName}</p>
           </div>
 
