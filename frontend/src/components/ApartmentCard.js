@@ -79,7 +79,7 @@ export default function ApartmentCard({ apartment, viewMode = "grid" }) {
                 </div>
                 <div className="flex items-center">
                   <Building className="w-4 h-4 mr-2 text-accent" />
-                  <span>{apartment.project}</span>
+                  <span style={{ fontSize: "12px" }}>{apartment.project}</span>
                 </div>
                 {/* <div className="flex items-center">
             <Star className="w-4 h-4 mr-2 text-accent" />
