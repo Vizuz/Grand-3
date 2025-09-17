@@ -24,8 +24,8 @@ const FEATURES_ICONS = {
   "Раздельный туалет и ванная": "🚽",
   "Высокие потолки": "🏛️",
   "Большой санузел": "🚿",
-  "Гардеробная": "👗",
-  "Кладовка": "📦",
+  Гардеробная: "👗",
+  Кладовка: "📦",
   "Две спальни": "🛏️",
   "Три спальни": "🛏️",
 };
@@ -62,7 +62,8 @@ export default function ApartmentsManager() {
   const formatPrice = (price) => {
     if (!price) return "";
     // Число -> "8 000 000 ₸"
-    const num = typeof price === "string" ? parseInt(price.replace(/\D/g, "")) : price;
+    const num =
+      typeof price === "string" ? parseInt(price.replace(/\D/g, "")) : price;
     if (!num) return "";
     return `${new Intl.NumberFormat("ru-RU").format(num)} ₸`;
   };
@@ -141,9 +142,7 @@ export default function ApartmentsManager() {
               .filter(Boolean)
           : [],
       description: formData.description,
-      features: Array.isArray(formData.features)
-        ? formData.features
-        : [],
+      features: Array.isArray(formData.features) ? formData.features : [],
       rooms: parseInt(formData.rooms),
       // available: formData.available, // убрали поле
     };
@@ -176,9 +175,7 @@ export default function ApartmentsManager() {
       images: Array.isArray(apartment.images)
         ? apartment.images.join(", ")
         : "",
-      features: Array.isArray(apartment.features)
-        ? apartment.features
-        : [],
+      features: Array.isArray(apartment.features) ? apartment.features : [],
       description: apartment.description,
       // isNew: apartment.isNew, // убрали поле
       // available: apartment.available, // убрали поле
@@ -258,7 +255,9 @@ export default function ApartmentsManager() {
                   </label>
                   <select
                     value={formData.rooms}
-                    onChange={(e) => setFormData({ ...formData, rooms: e.target.value })}
+                    onChange={(e) =>
+                      setFormData({ ...formData, rooms: e.target.value })
+                    }
                     className="w-full border border-gray-300 rounded-lg px-3 py-2"
                     required
                   >
@@ -301,11 +300,14 @@ export default function ApartmentsManager() {
                   >
                     <option value="">Выберите этаж</option>
                     {Number(formData.totalFloors) > 0 &&
-                      Array.from({ length: Number(formData.totalFloors) }, (_, i) => (
-                        <option value={String(i + 1)} key={i + 1}>
-                          {i + 1}
-                        </option>
-                      ))}
+                      Array.from(
+                        { length: Number(formData.totalFloors) },
+                        (_, i) => (
+                          <option value={String(i + 1)} key={i + 1}>
+                            {i + 1}
+                          </option>
+                        ),
+                      )}
                   </select>
                 </div>
                 <div>
@@ -374,8 +376,11 @@ export default function ApartmentsManager() {
                 {(Array.isArray(formData.images)
                   ? formData.images
                   : formData.images
-                  ? formData.images.split(",").map((p) => p.trim()).filter(Boolean)
-                  : []
+                    ? formData.images
+                        .split(",")
+                        .map((p) => p.trim())
+                        .filter(Boolean)
+                    : []
                 ).map((img, idx) => (
                   <div key={img} className="relative mr-2 mb-2 inline-block">
                     <img
@@ -393,8 +398,11 @@ export default function ApartmentsManager() {
                           images: (Array.isArray(fd.images)
                             ? fd.images
                             : fd.images
-                            ? fd.images.split(",").map((p) => p.trim()).filter(Boolean)
-                            : []
+                              ? fd.images
+                                  .split(",")
+                                  .map((p) => p.trim())
+                                  .filter(Boolean)
+                              : []
                           ).filter((url) => url !== img),
                         }));
                       }}
@@ -435,7 +443,9 @@ export default function ApartmentsManager() {
                       <div
                         key={option}
                         className={`border rounded-lg p-2 flex items-center cursor-pointer hover:border-black transition ${
-                          checked ? "border-black bg-gray-100" : "border-gray-300"
+                          checked
+                            ? "border-black bg-gray-100"
+                            : "border-gray-300"
                         }`}
                         onClick={() => {
                           if (!checked) {
@@ -446,7 +456,9 @@ export default function ApartmentsManager() {
                           } else {
                             setFormData({
                               ...formData,
-                              features: formData.features.filter((f) => f !== option),
+                              features: formData.features.filter(
+                                (f) => f !== option,
+                              ),
                             });
                           }
                         }}
@@ -461,7 +473,9 @@ export default function ApartmentsManager() {
                           tabIndex={-1}
                           className="mr-2 accent-black"
                         />
-                        <span className="text-xl mr-2">{FEATURES_ICONS[option] || "🏠"}</span>
+                        <span className="text-xl mr-2">
+                          {FEATURES_ICONS[option] || "🏠"}
+                        </span>
                         <span className="text-sm">{option}</span>
                       </div>
                     );

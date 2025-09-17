@@ -103,7 +103,7 @@ export default function ApartmentDetailPage() {
           {/* Main Content */}
           <div className="lg:col-span-2">
             {/* Image Gallery */}
-            <div className="bg-white rounded-lg shadow-lg overflow-hidden mb-8">
+            <div className="bg-white  shadow-lg overflow-hidden mb-8">
               <div className="relative h-96">
                 {apartment.images && apartment.images.length > 0 ? (
                   <img
@@ -116,14 +116,6 @@ export default function ApartmentDetailPage() {
                     Нет фото
                   </div>
                 )}
-
-                {apartment.isNew && (
-                  <div className="absolute top-6 left-6">
-                    <span className="bg-accent text-white px-4 py-2 rounded-full">
-                      НОВИНКА
-                    </span>
-                  </div>
-                )}
               </div>
 
               {/* Thumbnail Gallery */}
@@ -133,7 +125,7 @@ export default function ApartmentDetailPage() {
                     <button
                       key={index}
                       onClick={() => setCurrentImageIndex(index)}
-                      className={`flex-shrink-0 w-20 h-20 rounded-lg overflow-hidden border-2 transition-all ${
+                      className={`flex-shrink-0 w-20 h-20 overflow-hidden border-2 transition-all ${
                         index === currentImageIndex
                           ? "border-accent"
                           : "border-gray-200"
@@ -151,13 +143,13 @@ export default function ApartmentDetailPage() {
             </div>
 
             {/* Apartment Details */}
-            <div className="bg-white rounded-lg shadow-lg p-8 mb-8">
+            <div className="bg-white shadow-lg p-8 mb-8">
               <h2 className="text-2xl font-bold text-primary-900 mb-6">
                 Характеристики
               </h2>
 
               <div className="grid md:grid-cols-2 gap-6">
-                <div className="flex items-center p-4 bg-gray-50 rounded-lg">
+                <div className="flex items-center p-4 bg-gray-50">
                   <Home className="w-8 h-8 text-accent mr-4" />
                   <div>
                     <div className="text-sm text-gray-600">Комнаты</div>
@@ -167,7 +159,7 @@ export default function ApartmentDetailPage() {
                   </div>
                 </div>
 
-                <div className="flex items-center p-4 bg-gray-50 rounded-lg">
+                <div className="flex items-center p-4 bg-gray-50">
                   <Maximize className="w-8 h-8 text-accent mr-4" />
                   <div>
                     <div className="text-sm text-gray-600">Площадь</div>
@@ -177,7 +169,7 @@ export default function ApartmentDetailPage() {
                   </div>
                 </div>
 
-                <div className="flex items-center p-4 bg-gray-50 rounded-lg">
+                <div className="flex items-center p-4 bg-gray-50">
                   <Building2 className="w-8 h-8 text-accent mr-4" />
                   <div>
                     <div className="text-sm text-gray-600">Этаж</div>
@@ -187,7 +179,7 @@ export default function ApartmentDetailPage() {
                   </div>
                 </div>
 
-                <div className="flex items-center p-4 bg-gray-50 rounded-lg">
+                <div className="flex items-center p-4 bg-gray-50">
                   <Building className="w-8 h-8 text-accent mr-4" />
                   <div>
                     <div className="text-sm text-gray-600">Жилой комплекс</div>
@@ -201,7 +193,7 @@ export default function ApartmentDetailPage() {
 
             {/* Features */}
             {apartment.features && apartment.features.length > 0 && (
-              <div className="bg-white rounded-lg shadow-lg p-8">
+              <div className="bg-white  shadow-lg p-8">
                 <h2 className="text-2xl font-bold text-primary-900 mb-6">
                   Особенности
                 </h2>
@@ -209,7 +201,7 @@ export default function ApartmentDetailPage() {
                 <div className="grid md:grid-cols-2 gap-4">
                   {apartment.features.map((feature, index) => (
                     <div key={index} className="flex items-center">
-                      <div className="w-3 h-3 bg-accent rounded-full mr-3" />
+                      <div className="w-3 h-3 bg-accent  mr-3" />
                       <span className="text-gray-700">{feature}</span>
                     </div>
                   ))}
@@ -221,7 +213,7 @@ export default function ApartmentDetailPage() {
           {/* Sidebar */}
           <div className="lg:col-span-1">
             {/* Price Card */}
-            <div className="bg-white rounded-lg shadow-lg p-8 mb-8">
+            <div className="bg-white shadow-lg p-8 mb-8">
               <div className="text-center mb-6">
                 <div className="text-4xl font-bold text-primary-900 mb-2">
                   {formatPrice(apartment.price)}
@@ -234,7 +226,7 @@ export default function ApartmentDetailPage() {
               <div className="space-y-4 mb-8">
                 <Link
                   to="/contacts"
-                  className="w-full border-2 border-[#1a3d76] text-[#1a3d76] hover:bg-[#1a3d76] hover:text-white px-8 py-4 rounded-lg text-lg transition-all duration-300 flex items-center justify-center disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="w-full border-2 border-[#1a3d76] text-[#1a3d76] hover:bg-[#1a3d76] hover:text-white px-8 py-4 text-lg transition-all duration-300 flex items-center justify-center disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   Оставить заявку
                 </Link>
