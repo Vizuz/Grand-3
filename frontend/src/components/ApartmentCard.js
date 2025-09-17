@@ -195,7 +195,7 @@ export default function ApartmentCard({ apartment, viewMode = "grid" }) {
           <Link
             to={`/apartments/${apartment.id}`}
             onClick={(e) => e.stopPropagation()}
-            className="w-full border-2 border-[#1a3d76] text-[#1a3d76] hover:bg-[#1a3d76] hover:text-white px-8 py-4 text-lg transition-all duration-300 flex items-center justify-center disabled:opacity-50 disabled:cursor-not-allowed"
+            className="inline-flex items-center justify-center w-full bg-[#242f3c] text-white font-medium px-4 py-2 rounded-lg transition-transform duration-200 hover:scale-105 "
           >
             Подробнее
             <svg
@@ -214,14 +214,7 @@ export default function ApartmentCard({ apartment, viewMode = "grid" }) {
             </svg>
           </Link>
 
-          {/* <div className="space-y-4 mb-8">
-                          <Link
-                            to="/contacts"
-                            className="w-full border-2 border-[#1a3d76] text-[#1a3d76] hover:bg-[#1a3d76] hover:text-white px-8 py-4 text-lg transition-all duration-300 flex items-center justify-center disabled:opacity-50 disabled:cursor-not-allowed"
-                          >
-                            Оставить заявку
-                          </Link>
-           </div> */}
+          
         </div>
       </div>
     </div>
