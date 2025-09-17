@@ -55,7 +55,7 @@ export default function ApartmentCard({ apartment, viewMode = "grid" }) {
                   <h3 className="text-xl font-bold text-primary-900 mb-2">
                     Квартира №{apartment.number}
                   </h3>
-                  <p className="text-accent">{apartment.projectName}</p>
+                  <p className="text-accent text-sm">{apartment.projectName}</p>
                 </div>
                 <div className="text-2xl font-bold text-primary-900">
                   {apartment.price ? formatPrice(apartment.price) : "Старт продаж"}
@@ -79,7 +79,7 @@ export default function ApartmentCard({ apartment, viewMode = "grid" }) {
                 </div>
                 <div className="flex items-center">
                   <Building className="w-4 h-4 mr-2 text-accent" />
-                  <span style={{ fontSize: "12px" }}>{apartment.project}</span>
+                  <span className="text-xs">{apartment.project}</span>
                 </div>
                 {/* <div className="flex items-center">
             <Star className="w-4 h-4 mr-2 text-accent" />
@@ -168,7 +168,7 @@ export default function ApartmentCard({ apartment, viewMode = "grid" }) {
             </div>
             <div className="flex items-center">
               <Building className="w-4 h-4 mr-2 text-accent" />
-              <span>{apartment.project}</span>
+              <span className="text-xs">{apartment.project}</span>
             </div>
           </div>
 
