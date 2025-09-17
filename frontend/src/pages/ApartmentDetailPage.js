@@ -149,7 +149,7 @@ export default function ApartmentDetailPage() {
               </h2>
 
               <div className="grid md:grid-cols-2 gap-6">
-                <div className="flex items-center p-4 bg-gray-50">
+                <div className="flex items-center p-4 bg-gray-50 rounded-lg">
                   <Home className="w-8 h-8 text-accent mr-4" />
                   <div>
                     <div className="text-sm text-gray-600">Комнаты</div>
@@ -159,7 +159,7 @@ export default function ApartmentDetailPage() {
                   </div>
                 </div>
 
-                <div className="flex items-center p-4 bg-gray-50">
+                <div className="flex items-center p-4 bg-gray-50 rounded-lg">
                   <Maximize className="w-8 h-8 text-accent mr-4" />
                   <div>
                     <div className="text-sm text-gray-600">Площадь</div>
@@ -169,7 +169,7 @@ export default function ApartmentDetailPage() {
                   </div>
                 </div>
 
-                <div className="flex items-center p-4 bg-gray-50">
+                <div className="flex items-center p-4 bg-gray-50 rounded-lg">
                   <Building2 className="w-8 h-8 text-accent mr-4" />
                   <div>
                     <div className="text-sm text-gray-600">Этаж</div>
@@ -179,7 +179,7 @@ export default function ApartmentDetailPage() {
                   </div>
                 </div>
 
-                <div className="flex items-center p-4 bg-gray-50">
+                <div className="flex items-center p-4 bg-gray-50 rounded-lg">
                   <Building className="w-8 h-8 text-accent mr-4" />
                   <div>
                     <div className="text-sm text-gray-600">Жилой комплекс</div>
@@ -226,7 +226,7 @@ export default function ApartmentDetailPage() {
               <div className="space-y-4 mb-8">
                 <Link
                   to="/contacts"
-                  className="w-full border-2 border-[#1a3d76] text-[#1a3d76] hover:bg-[#1a3d76] hover:text-white px-8 py-4 text-lg transition-all duration-300 flex items-center justify-center disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="w-full border-2 border-[#1a3d76] text-[#1a3d76] hover:bg-[#1a3d76] hover:text-white px-8 py-4 text-lg rounded-lg transition-all duration-300 flex items-center justify-center disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   Оставить заявку
                 </Link>
