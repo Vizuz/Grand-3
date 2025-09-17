@@ -84,7 +84,7 @@ class Apartment(BaseModel):
     area: float
     floor: int
     totalFloors: int
-    price: Optional[int] = None  
+    price: Optional[int] = None
     images: Optional[List[str]] = []
     description: Optional[str] = None 
     features: Optional[List[str]] = []

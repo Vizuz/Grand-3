@@ -91,10 +91,14 @@ export const DataProvider = ({ children }) => {
 
   const addApartment = async (apartment) => {
     try {
+      const normalizedApartment = {
+        ...apartment,
+        price: apartment.price === "" ? null : apartment.price,
+      };
       const res = await fetch(`${API_URL}/apartments`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(apartment),
+        body: JSON.stringify(normalizedApartment),
       });
       if (!res.ok) throw new Error("Network response was not ok");
       const data = await res.json();
@@ -108,10 +112,14 @@ export const DataProvider = ({ children }) => {
 
   const updateApartment = async (id, apartment) => {
     try {
+      const normalizedApartment = {
+        ...apartment,
+        price: apartment.price === "" ? null : apartment.price,
+      };
       const res = await fetch(`${API_URL}/apartments/${id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(apartment),
+        body: JSON.stringify(normalizedApartment),
       });
       if (!res.ok) throw new Error("Network response was not ok");
       const data = await res.json();
