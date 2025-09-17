@@ -2,7 +2,8 @@
 
 .App {
   text-align: left;
-}body {
+}
+body {
   font-family: "Lato", sans-serif;
   font-weight: 100;
   font-style: normal;
@@ -52,7 +53,6 @@
 }
 
 .animate-slide-up {
-
 }
 
 .animate-fade-in {
@@ -80,7 +80,7 @@
 /* Loading animations */
 .spinner {
   border: 4px solid #f3f3f3;
-  border-top: 4px solid #D4AF37;
+  border-top: 4px solid #d4af37;
   border-radius: 50%;
   width: 40px;
   height: 40px;
@@ -88,6 +88,10 @@
 }
 
 @keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }

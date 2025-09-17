@@ -1,5 +1,9 @@
 :root {
-  --bg-gradient: linear-gradient(180deg, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0.1) 100%);
+  --bg-gradient: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0.6) 0%,
+    rgba(0, 0, 0, 0.1) 100%
+  );
   --color-surface-white: #ffffff;
 }
 
@@ -63,7 +67,7 @@
   text-transform: none;
   z-index: 2;
   color: #fff;
-  text-shadow: 0 12px 32px rgba(0,0,0,.45);
+  text-shadow: 0 12px 32px rgba(0, 0, 0, 0.45);
 }
 
 /* === ЦЕНТРИРОВАННЫЙ КОНТЕНТ-БЛОК (фикс для мобильных) === */
@@ -80,7 +84,7 @@
   color: #fff;
   background: rgba(0, 0, 0, 0.55);
   padding: clamp(16px, 3vw, 32px);
-  box-shadow: 0 20px 60px rgba(0,0,0,.35);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
   z-index: 999;
   line-height: 1.45;
   pointer-events: auto; /* кликабельность внутри */
@@ -99,7 +103,9 @@
   }
 }
 
-.contentBox * { user-select: text; }
+.contentBox * {
+  user-select: text;
+}
 
 .contentTitle {
   font-size: clamp(28px, 4vw, 56px);
@@ -107,7 +113,9 @@
   margin: 0 0 16px 0;
 }
 
-.contentBlock + .contentBlock { margin-top: 18px; }
+.contentBlock + .contentBlock {
+  margin-top: 18px;
+}
 
 .contentSubtitle {
   font-size: clamp(18px, 2.2vw, 28px);
@@ -124,13 +132,20 @@
 }
 
 /* Идентификаторы слайдов (на будущее) */
-.first {}
-.second {}
-.third {}
-.fourth {}
-.fifth {}
+.first {
+}
+.second {
+}
+.third {
+}
+.fourth {
+}
+.fifth {
+}
 
-.clip-text { overflow: hidden; }
+.clip-text {
+  overflow: hidden;
+}
 
 /* Чёрная подложка, чтобы не мигало белым до первого слайда */
 .wrapper {
@@ -144,7 +159,7 @@
 @media (max-width: 720px) {
   .contentBox {
     width: 92%;
-    background: rgba(0,0,0,.6);
+    background: rgba(0, 0, 0, 0.6);
   }
 }
 

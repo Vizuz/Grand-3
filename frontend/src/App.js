@@ -1,15 +1,15 @@
-import React, { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { DataProvider } from './context/DataContext';
-import HomePage from './pages/HomePage';
-import ApartmentsPage from './pages/ApartmentsPage';
-import ApartmentDetailPage from './pages/ApartmentDetailPage';
-import AboutPage from './pages/AboutPage';
-import ContactsPage from './pages/ContactsPage';
-import AdminPage from './pages/AdminPage';
-import './App.css';
-import ScrollToTop from './components/ScrollToTop';
-import ParallaxTest from './components/ParallaxTest';
+import React, { useState, useEffect } from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { DataProvider } from "./context/DataContext";
+import HomePage from "./pages/HomePage";
+import ApartmentsPage from "./pages/ApartmentsPage";
+import ApartmentDetailPage from "./pages/ApartmentDetailPage";
+import AboutPage from "./pages/AboutPage";
+import ContactsPage from "./pages/ContactsPage";
+import AdminPage from "./pages/AdminPage";
+import "./App.css";
+import ScrollToTop from "./components/ScrollToTop";
+import ParallaxTest from "./components/ParallaxTest";
 function App() {
   return (
     <DataProvider>

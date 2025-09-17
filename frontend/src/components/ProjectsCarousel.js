@@ -1,83 +1,89 @@
-import React, { useState, useEffect } from 'react';
-import { ChevronLeft, ChevronRight, MapPin, Calendar, Building } from 'lucide-react';
+import React, { useState, useEffect } from "react";
+import {
+  ChevronLeft,
+  ChevronRight,
+  MapPin,
+  Calendar,
+  Building,
+} from "lucide-react";
 
 export default function ProjectsCarousel() {
   const projects = [
     {
-      name: 'ЖК Акбидай 1',
-      address: 'ул Акбидай 11А',
-      completion: '2022',
+      name: "ЖК Акбидай 1",
+      address: "ул Акбидай 11А",
+      completion: "2022",
       totalApartments: 40,
       floors: 5,
-      description: 'Первый жилой комплекс премиум класса в районе Акбидай.',
-      features: ['Детская площадка', 'Удобная парковка'],
-      image: './img/aqbiday-1.jpg',
-      status: 'Сдано',
-      
-      bookingOpen: false,
-      
-    },
-    {
-      name: 'ЖК Акбидай 2',
-      address: 'ул Акбидай 13Б',
-      completion: '2023',
-      totalApartments: 40,
-      floors: 5,
-      description: 'Продолжение успешного проекта с улучшенной планировкой.',
-      features: ['Детская площадка', 'Удобная парковка'],
-      image: './img/aqbiday-2.jpg',
-      status: 'Сдано',
+      description: "Первый жилой комплекс премиум класса в районе Акбидай.",
+      features: ["Детская площадка", "Удобная парковка"],
+      image: "./img/aqbiday-1.jpg",
+      status: "Сдано",
+
       bookingOpen: false,
     },
     {
-      name: 'ЖК Акбидай 3',
-      address: 'ул Кенжетаева 18',
-      completion: '2024',
+      name: "ЖК Акбидай 2",
+      address: "ул Акбидай 13Б",
+      completion: "2023",
       totalApartments: 40,
       floors: 5,
-      description: 'Продолжение успешного проекта с улучшенной планировкой.',
-      features: ['Детская площадка', 'Удобная парковка'],
-      image: './img/aqbiday-3.jpg',
-      status: 'Сдано',
+      description: "Продолжение успешного проекта с улучшенной планировкой.",
+      features: ["Детская площадка", "Удобная парковка"],
+      image: "./img/aqbiday-2.jpg",
+      status: "Сдано",
       bookingOpen: false,
     },
     {
-      name: 'ЖК Акбидай 4',
-      address: 'ул Кенжетаева 18',
-      completion: '2026 (в процессе строительства)',
+      name: "ЖК Акбидай 3",
+      address: "ул Кенжетаева 18",
+      completion: "2024",
+      totalApartments: 40,
+      floors: 5,
+      description: "Продолжение успешного проекта с улучшенной планировкой.",
+      features: ["Детская площадка", "Удобная парковка"],
+      image: "./img/aqbiday-3.jpg",
+      status: "Сдано",
+      bookingOpen: false,
+    },
+    {
+      name: "ЖК Акбидай 4",
+      address: "ул Кенжетаева 18",
+      completion: "2026 (в процессе строительства)",
       totalApartments: 115,
       floors: 5,
-      description: 'Продолжение успешного проекта с улучшенной планировкой.',
-      features: ['Детская площадка', 'Удобная парковка'],
-      image: './img/aqbiday-4.jpg',
-      status: 'В процессе строительства',
+      description: "Продолжение успешного проекта с улучшенной планировкой.",
+      features: ["Детская площадка", "Удобная парковка"],
+      image: "./img/aqbiday-4.jpg",
+      status: "В процессе строительства",
       bookingOpen: false,
-      pdf: '/files/aqbidai.pdf',              // ← ссылка на ваш PDF
+      pdf: "/files/aqbidai.pdf", // ← ссылка на ваш PDF
     },
     {
-      name: 'ЖК Гармония',
-      address: 'ул Васильковский 18/2',
-      completion: '2022',
+      name: "ЖК Гармония",
+      address: "ул Васильковский 18/2",
+      completion: "2022",
       totalApartments: 90,
       floors: 9,
-      description: '',
-      features: ['Детская площадка', 'Близко к школам', 'Перспективный район'],
-      image: './img/garmonia.jpg',
-      status: 'Сдано',
+      description: "",
+      features: ["Детская площадка", "Близко к школам", "Перспективный район"],
+      image: "./img/garmonia.jpg",
+      status: "Сдано",
       bookingOpen: false,
     },
     {
-      name: 'ЖК Эдем',
-      address: 'ул Васильковский 18/1',
-      completion: '2025 (в процессе строительства)',
+      name: "ЖК Эдем",
+      address: "ул Васильковский 18/1",
+      completion: "2025 (в процессе строительства)",
       totalApartments: 90,
       floors: 9,
-      description: 'Новый проект с уникальной архитектурой. Открыто бронирование!',
-      features: ['Детская площадка', 'Близко к школам', 'Перспективный район'],
-      image: './img/adem.jpg',
-      status: 'В процессе строительства',
+      description:
+        "Новый проект с уникальной архитектурой. Открыто бронирование!",
+      features: ["Детская площадка", "Близко к школам", "Перспективный район"],
+      image: "./img/adem.jpg",
+      status: "В процессе строительства",
       bookingOpen: false,
-      pdf: '/files/adem.pdf',                 // ← и здесь ваш второй PDF
+      pdf: "/files/adem.pdf", // ← и здесь ваш второй PDF
     },
   ];
 
@@ -88,7 +94,7 @@ export default function ProjectsCarousel() {
   useEffect(() => {
     if (!isAutoPlaying || projects.length === 0) return;
     const interval = setInterval(() => {
-      setCurrentIndex(i => (i + 1) % projects.length);
+      setCurrentIndex((i) => (i + 1) % projects.length);
     }, 5000);
     return () => clearInterval(interval);
   }, [isAutoPlaying, projects.length]);
@@ -101,14 +107,14 @@ export default function ProjectsCarousel() {
   }, [projects.length, currentIndex]);
 
   const nextSlide = () => {
-    setCurrentIndex(i => (i + 1) % projects.length);
+    setCurrentIndex((i) => (i + 1) % projects.length);
     setIsAutoPlaying(false);
   };
   const prevSlide = () => {
-    setCurrentIndex(i => (i - 1 + projects.length) % projects.length);
+    setCurrentIndex((i) => (i - 1 + projects.length) % projects.length);
     setIsAutoPlaying(false);
   };
-  const goToSlide = i => {
+  const goToSlide = (i) => {
     setCurrentIndex(i);
     setIsAutoPlaying(false);
   };
@@ -124,7 +130,8 @@ export default function ProjectsCarousel() {
             Наши проекты
           </h2>
           <p className="text-xl text-neutral-dark/70 max-w-3xl mx-auto">
-            Каждый жилой комплекс GRAND — это воплощение высоких стандартов качества и комфорта
+            Каждый жилой комплекс GRAND — это воплощение высоких стандартов
+            качества и комфорта
           </p>
         </div>
 
@@ -185,23 +192,20 @@ export default function ProjectsCarousel() {
 
                 {/* Кнопки действий */}
                 <div className="flex flex-col sm:flex-row gap-4">
-                  
-
                   {/* Кнопка «Узнать больше» */}
                   {current.pdf && (
-  <a
-    href={current.pdf}
-    target="_blank"
-    rel="noopener noreferrer"
-    className="w-full border-2 border-[#1a3d76] text-[#1a3d76]
+                    <a
+                      href={current.pdf}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="w-full border-2 border-[#1a3d76] text-[#1a3d76]
                hover:bg-[#1a3d76] hover:text-white px-8 py-4
                rounded-lg text-lg transition-all duration-300
                flex items-center justify-center"
-  >
-    
-    Узнать больше
-  </a>
-)}
+                    >
+                      Узнать больше
+                    </a>
+                  )}
 
                   {current.bookingOpen && (
                     <button className="border-2 border-accent text-accent hover:bg-accent hover:text-white px-6 py-3 rounded-lg transition-all duration-300">
@@ -240,8 +244,8 @@ export default function ProjectsCarousel() {
                   onClick={() => goToSlide(idx)}
                   className={`w-3 h-3 rounded-full transition-all duration-300 ${
                     idx === currentIndex
-                      ? 'bg-accent w-8'
-                      : 'bg-neutral-dark/30 hover:bg-accent/50'
+                      ? "bg-accent w-8"
+                      : "bg-neutral-dark/30 hover:bg-accent/50"
                   }`}
                 />
               ))}

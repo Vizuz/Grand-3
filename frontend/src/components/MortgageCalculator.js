@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { Calculator, TrendingUp } from 'lucide-react';
+import React, { useState, useEffect } from "react";
+import { Calculator, TrendingUp } from "lucide-react";
 
 export default function MortgageCalculator() {
   const [amount, setAmount] = useState(30000000); // Сумма кредита в тенге
@@ -18,11 +18,12 @@ export default function MortgageCalculator() {
 
     const monthlyRate = rate / 100 / 12;
     const numberOfPayments = term * 12;
-    
+
     // Аннуитетный платеж
-    const monthly = (amount * monthlyRate * Math.pow(1 + monthlyRate, numberOfPayments)) / 
-                   (Math.pow(1 + monthlyRate, numberOfPayments) - 1);
-    
+    const monthly =
+      (amount * monthlyRate * Math.pow(1 + monthlyRate, numberOfPayments)) /
+      (Math.pow(1 + monthlyRate, numberOfPayments) - 1);
+
     const total = monthly * numberOfPayments;
     const over = total - amount;
 
@@ -32,9 +33,9 @@ export default function MortgageCalculator() {
   };
 
   const formatCurrency = (value) => {
-    return new Intl.NumberFormat('ru-RU', {
-      style: 'currency',
-      currency: 'KZT',
+    return new Intl.NumberFormat("ru-RU", {
+      style: "currency",
+      currency: "KZT",
       minimumFractionDigits: 0,
     }).format(value);
   };
@@ -43,7 +44,9 @@ export default function MortgageCalculator() {
     <div className="bg-white rounded-lg p-6 shadow-lg">
       <div className="flex items-center mb-6">
         <Calculator className="w-6 h-6 text-accent mr-3" />
-        <h3 className="text-lg font-bold text-primary-900">Ипотечный калькулятор</h3>
+        <h3 className="text-lg font-bold text-primary-900">
+          Ипотечный калькулятор
+        </h3>
       </div>
 
       <div className="space-y-6">
@@ -113,7 +116,7 @@ export default function MortgageCalculator() {
             <TrendingUp className="w-5 h-5 mr-2" />
             Результат расчёта
           </h4>
-          
+
           <div className="space-y-3">
             <div className="flex justify-between items-center p-3 bg-accent/5 rounded-lg">
               <span className="text-gray-600">Ежемесячный платёж:</span>
@@ -121,14 +124,14 @@ export default function MortgageCalculator() {
                 {formatCurrency(monthlyPayment)}
               </span>
             </div>
-            
+
             <div className="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
               <span className="text-gray-600">Общая сумма выплат:</span>
               <span className=" text-primary-900">
                 {formatCurrency(totalPayment)}
               </span>
             </div>
-            
+
             <div className="flex justify-between items-center p-3 bg-red-50 rounded-lg">
               <span className="text-gray-600">Переплата:</span>
               <span className=" text-red-600">

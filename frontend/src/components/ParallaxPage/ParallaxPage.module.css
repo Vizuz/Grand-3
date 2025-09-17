@@ -29,7 +29,7 @@
   left: 0;
   right: 0;
   height: 100vh; /* переопределяется из JS, но пусть будет дефолт */
-  z-index: 0;    /* ниже контента */
+  z-index: 0; /* ниже контента */
   background: transparent;
   will-change: transform;
 }

@@ -2,9 +2,9 @@
 :global(:root) {
   --scale: 0.1;
   --space: 8vmin;
-
 }
-html, body {
+html,
+body {
   overflow-x: hidden;
 }
 @media (prefers-reduced-motion) {
@@ -12,7 +12,6 @@ html, body {
     --scale: 0;
   }
 }
-
 
 @keyframes fadein {
   to {
@@ -34,7 +33,7 @@ html, body {
 }
 
 .pageTitle::after {
-  content: '↓';
+  content: "↓";
   display: block;
   font-size: 2em;
   opacity: 0;
@@ -104,7 +103,7 @@ html, body {
 }
 
 .imageContainer::after {
-  content: '';
+  content: "";
   position: absolute;
   inset-block-end: 0;
   inset-inline-start: 0;

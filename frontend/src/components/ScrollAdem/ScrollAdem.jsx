@@ -1,8 +1,8 @@
 // src/components/HorizontalImages/HorizontalImages.jsx
-import React, { useRef, useEffect } from 'react';
-import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import styles from './ScrollAdem.module.css';
+import React, { useRef, useEffect } from "react";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import styles from "./ScrollAdem.module.css";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -23,10 +23,10 @@ export default function ScrollAdem() {
     const ctx = gsap.context(() => {
       gsap.to(pinWrap, {
         x: -scrollLength,
-        ease: 'none',
+        ease: "none",
         scrollTrigger: {
           trigger: sectionPin,
-          start: 'top top',
+          start: "top top",
           // Use a dynamic end value equal to the horizontal distance we need to scroll
           end: () => "+=" + scrollLength,
           anticipatePin: 1,
@@ -41,7 +41,7 @@ export default function ScrollAdem() {
 
     return () => {
       ctx.revert();
-      ScrollTrigger.getAll().forEach(trigger => trigger.kill());
+      ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
     };
   }, []);
 
@@ -49,7 +49,7 @@ export default function ScrollAdem() {
     <div ref={containerRef} className={styles.container} id="edem-info">
       <section
         className={styles.section}
-        style={{ '--bgcolor': '#d38e3b', '--textcolor': '#032f35' }}
+        style={{ "--bgcolor": "#d38e3b", "--textcolor": "#032f35" }}
       >
         <div>
           <h1>
@@ -57,7 +57,9 @@ export default function ScrollAdem() {
             {/* <span>section</span> */}
           </h1>
           <p>
-            Grand Komfort Stroy представляет новый проект ЭДЕМ — девятиэтажный жилой дом комфорт-класса с закрытой территорией и благоустроенным двором.
+            Grand Komfort Stroy представляет новый проект ЭДЕМ — девятиэтажный
+            жилой дом комфорт-класса с закрытой территорией и благоустроенным
+            двором.
           </p>
         </div>
       </section>
@@ -69,7 +71,9 @@ export default function ScrollAdem() {
               «ЭДЕМ: функция и эстетика»
             </div>
             <div className="max-w-3xl text-sm sm:text-base md:text-lg lg:text-xl leading-snug">
-              9-этажный кирпичный комплекс с коммерческим первым этажом, свободными планировками и благоустроённым двором в новом районе Кокшетау.
+              9-этажный кирпичный комплекс с коммерческим первым этажом,
+              свободными планировками и благоустроённым двором в новом районе
+              Кокшетау.
             </div>
           </h2>
           <img
@@ -82,7 +86,7 @@ export default function ScrollAdem() {
             alt=""
             className={styles.image}
           />
-           <img
+          <img
             src="https://storage.yandexcloud.net/vizuz/adem-4.webp"
             alt=""
             className={styles.image}
@@ -97,33 +101,29 @@ export default function ScrollAdem() {
             alt=""
             className={styles.image}
           />
-           <img
+          <img
             src="https://storage.yandexcloud.net/vizuz/adem-13.webp"
             alt=""
             className={`${styles.image}`}
           />
-           <img
+          <img
             src="https://storage.yandexcloud.net/vizuz/adem-12.webp"
             alt=""
             className={styles.image}
           />
-          
-
 
           <img
             src="https://storage.yandexcloud.net/vizuz/adem-15.webp"
             alt=""
             className={styles.image}
           />
-         
-          
-         
+
           <img
             src="https://storage.yandexcloud.net/vizuz/adem-14.webp"
             alt=""
             className={styles.image}
           />
-          
+
           <img
             src="https://storage.yandexcloud.net/vizuz/adem-11.webp"
             alt=""
@@ -134,13 +134,8 @@ export default function ScrollAdem() {
             alt=""
             className={styles.image}
           />
-          
-          
         </div>
-        
       </section>
-
-      
     </div>
   );
 }

@@ -1,42 +1,35 @@
-import React, { useState, useEffect } from 'react';
-import {
-  Phone,
-  MapPin,
-  Clock,
-  Send,
-  MessageCircle,
-} from 'lucide-react';
-import { useData } from '../context/DataContext';
-import Navigation from '../components/Navigation';
-import Footer from '../components/Footer';
-import ContactsMap from '../components/ContactsMap';
-
+import React, { useState, useEffect } from "react";
+import { Phone, MapPin, Clock, Send, MessageCircle } from "lucide-react";
+import { useData } from "../context/DataContext";
+import Navigation from "../components/Navigation";
+import Footer from "../components/Footer";
+import ContactsMap from "../components/ContactsMap";
 
 const API_URL =
   process.env.REACT_APP_API_URL ||
-  'https://grand-3.onrender.com/api' ||
-  'http://localhost:8000/api';
-  
-const image= 'https://storage.yandexcloud.net/vizuz/grand-office.webp';
+  "https://grand-3.onrender.com/api" ||
+  "http://localhost:8000/api";
+
+const image = "https://storage.yandexcloud.net/vizuz/grand-office.webp";
 export default function ContactsPage() {
   const { trackPageView, addApplication } = useData();
 
   const [formData, setFormData] = useState({
-    name: '',
-    phone: '',
-    message: ''
+    name: "",
+    phone: "",
+    message: "",
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [status, setStatus] = useState(null); // 'success' | 'error' | null
 
   useEffect(() => {
-    trackPageView('Контакты');
+    trackPageView("Контакты");
   }, [trackPageView]);
 
   const handleInputChange = (e) => {
     setFormData({
       ...formData,
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
     });
   };
 
@@ -48,25 +41,25 @@ export default function ContactsPage() {
     const applicationData = {
       name: formData.name.trim(),
       phone: formData.phone.trim(),
-      projectName: 'Общий вопрос',
-      source: 'Контактная форма',
-      ...(formData.message.trim() && { message: formData.message.trim() })
+      projectName: "Общий вопрос",
+      source: "Контактная форма",
+      ...(formData.message.trim() && { message: formData.message.trim() }),
     };
 
     try {
       const response = await fetch(`${API_URL}/applications`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(applicationData)
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(applicationData),
       });
-      if (!response.ok) throw new Error('Ошибка отправки');
+      if (!response.ok) throw new Error("Ошибка отправки");
       const saved = await response.json();
       addApplication(saved);
-      setStatus('success');
-      setFormData({ name: '', phone: '', message: '' });
+      setStatus("success");
+      setFormData({ name: "", phone: "", message: "" });
     } catch (error) {
       console.error(error);
-      setStatus('error');
+      setStatus("error");
     } finally {
       setIsSubmitting(false);
     }
@@ -77,8 +70,6 @@ export default function ContactsPage() {
       <Navigation />
 
       <main className="pt-32">
-        
-
         {/* Main content */}
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 ">
           <div className="grid lg:grid-cols-2 gap-12 pb-20">
@@ -212,12 +203,12 @@ export default function ContactsPage() {
                   </button>
 
                   {/* Статус */}
-                  {status === 'success' && (
+                  {status === "success" && (
                     <p className="text-[#242f3c] text-center">
                       Спасибо! Мы свяжемся с вами в ближайшее время.
                     </p>
                   )}
-                  {status === 'error' && (
+                  {status === "error" && (
                     <p className="text-red-600 text-center">
                       Произошла ошибка. Попробуйте ещё раз.
                     </p>
@@ -226,27 +217,24 @@ export default function ContactsPage() {
               </div>
             </div>
           </div>
-
-          
         </div>
 
         <div className="flex flex-col md:flex-row h-screen pb-20">
-  {/* Левая часть: на мобильных full‑width, на десктопе — 1/2 */}
-  <div className="w-full md:w-1/2 h-1/2 md:h-full overflow-hidden">
-    <img
-      src={image}
-      alt="logo"
-      className="w-full h-full object-cover select-none"
-      draggable={false}
-    />
-  </div>
+          {/* Левая часть: на мобильных full‑width, на десктопе — 1/2 */}
+          <div className="w-full md:w-1/2 h-1/2 md:h-full overflow-hidden">
+            <img
+              src={image}
+              alt="logo"
+              className="w-full h-full object-cover select-none"
+              draggable={false}
+            />
+          </div>
 
-  {/* Правая часть: карта */}
-  <div className="w-full md:w-1/2 h-1/2 md:h-full">
-    <ContactsMap className="w-full h-full" />
-  </div>
-</div>
-        
+          {/* Правая часть: карта */}
+          <div className="w-full md:w-1/2 h-1/2 md:h-full">
+            <ContactsMap className="w-full h-full" />
+          </div>
+        </div>
       </main>
 
       <Footer />

@@ -1,23 +1,31 @@
-import React from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { MapPin, Home, Maximize, Building2, Star, Building } from 'lucide-react';
+import React from "react";
+import { Link, useNavigate } from "react-router-dom";
+import {
+  MapPin,
+  Home,
+  Maximize,
+  Building2,
+  Star,
+  Building,
+} from "lucide-react";
 
-export default function ApartmentCard({ apartment, viewMode = 'grid' }) {
+export default function ApartmentCard({ apartment, viewMode = "grid" }) {
   const navigate = useNavigate();
 
   const formatPrice = (price) => {
-    return new Intl.NumberFormat('ru-RU', {
-      style: 'currency',
-      currency: 'KZT',
-      currencyDisplay: 'narrowSymbol',
+    return new Intl.NumberFormat("ru-RU", {
+      style: "currency",
+      currency: "KZT",
+      currencyDisplay: "narrowSymbol",
       minimumFractionDigits: 0,
     }).format(price);
   };
 
   // общий класс для корня карточки: full-height + flex-col
-  const cardClass = 'bg-white  overflow-hidden hover-lift cursor-pointer h-full flex flex-col';
-//rounded-lg shadow-lg
-  if (viewMode === 'list') {
+  const cardClass =
+    "bg-white  overflow-hidden hover-lift cursor-pointer h-full flex flex-col";
+  //rounded-lg shadow-lg
+  if (viewMode === "list") {
     return (
       <div
         className={cardClass}
@@ -26,7 +34,7 @@ export default function ApartmentCard({ apartment, viewMode = 'grid' }) {
         <div className="flex flex-col md:flex-row flex-1">
           <div className="md:w-80 h-48 md:h-auto relative flex-shrink-0">
             <img
-              src={apartment.images?.[0] || '/placeholder.jpg'}
+              src={apartment.images?.[0] || "/placeholder.jpg"}
               alt={`Квартира №${apartment.number}`}
               className="w-full h-full object-contain"
             />
@@ -65,7 +73,9 @@ export default function ApartmentCard({ apartment, viewMode = 'grid' }) {
                 </div>
                 <div className="flex items-center">
                   <Building2 className="w-4 h-4 mr-2 text-accent" />
-                  <span>{apartment.floor}/{apartment.totalFloors} эт.</span>
+                  <span>
+                    {apartment.floor}/{apartment.totalFloors} эт.
+                  </span>
                 </div>
                 <div className="flex items-center">
                   <Building className="w-4 h-4 mr-2 text-accent" />
@@ -118,7 +128,7 @@ export default function ApartmentCard({ apartment, viewMode = 'grid' }) {
     >
       <div className="relative h-48">
         <img
-          src={apartment.images?.[0] || '/placeholder.jpg'}
+          src={apartment.images?.[0] || "/placeholder.jpg"}
           alt={`Квартира №${apartment.number}`}
           className="w-full h-full object-contain"
         />
@@ -152,14 +162,15 @@ export default function ApartmentCard({ apartment, viewMode = 'grid' }) {
             </div>
             <div className="flex items-center">
               <Building2 className="w-4 h-4 mr-2 text-accent" />
-              <span>{apartment.floor}/{apartment.totalFloors} эт.</span>
+              <span>
+                {apartment.floor}/{apartment.totalFloors} эт.
+              </span>
             </div>
             <div className="flex items-center">
-               <Building className="w-4 h-4 mr-2 text-accent" />
-                  <span>{apartment.project}</span>
-                </div>
+              <Building className="w-4 h-4 mr-2 text-accent" />
+              <span>{apartment.project}</span>
+            </div>
           </div>
-          
 
           <div className="mb-4">
             <div className="text-2xl font-bold text-primary-900">

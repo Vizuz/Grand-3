@@ -1,19 +1,16 @@
-import React from 'react';
-import styles from './InfoAq.module.css';
+import React from "react";
+import styles from "./InfoAq.module.css";
 
 const content = [
   {
-    title: 'AQBIDAI IV',
-    image:
-      'https://storage.yandexcloud.net/vizuz/aqbidai-house.webp',
+    title: "AQBIDAI IV",
+    image: "https://storage.yandexcloud.net/vizuz/aqbidai-house.webp",
   },
-  
 ];
 
 export default function InfoAq() {
   return (
     <>
-
       <main className={styles.main}>
         {content.map((item, idx) => (
           <section className={styles.section} key={idx}>
@@ -27,7 +24,7 @@ export default function InfoAq() {
               {/* ─── Дом ─────────────────────────────────────── */}
               <h3 className={styles.subTitle}>Дом</h3>
               <p>
-                <strong>110&nbsp;квартир в&nbsp;5&nbsp;секциях.</strong>{' '}
+                <strong>110&nbsp;квартир в&nbsp;5&nbsp;секциях.</strong>{" "}
                 П‑образный, пятиэтажный жилой дом комфорт‑класса.
               </p>
 

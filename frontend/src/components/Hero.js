@@ -1,17 +1,16 @@
-import React, { useState, useEffect } from 'react';
-import { ChevronDown } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from "react";
+import { ChevronDown } from "lucide-react";
+import { Link } from "react-router-dom";
 
 export default function Hero() {
   const [scrollY, setScrollY] = useState(0);
 
   useEffect(() => {
     const handleScroll = () => setScrollY(window.scrollY);
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  
   // Параметры затухания и лимиты сдвига
   const fadeDistance = window.innerHeight / 2;
   const opacity = Math.max(0, 1 - scrollY / fadeDistance);
@@ -32,14 +31,13 @@ export default function Hero() {
         }}
       />
 
-
       {/* Контент Hero */}
       <div
         className="relative z-10 text-center text-white px-4 sm:px-6 lg:px-8"
         style={{
           transform: `translateY(${shiftTitle}px)`,
           opacity,
-          transition: 'opacity 0.1s linear, transform 0.2s ease-out',
+          transition: "opacity 0.1s linear, transform 0.2s ease-out",
         }}
       >
         <h1 className="text-5xl sm:text-6xl lg:text-8xl font-bold font-serif mb-6">
@@ -48,7 +46,10 @@ export default function Hero() {
 
         <p
           className="text-xl sm:text-2xl lg:text-3xl font-light mb-8 max-w-3xl mx-auto"
-          style={{ transform: `translateY(${shiftText}px)`, transition: 'transform 0.2s ease-out' }}
+          style={{
+            transform: `translateY(${shiftText}px)`,
+            transition: "transform 0.2s ease-out",
+          }}
         >
           Жилые пространства, созданные для жизни и вдохновения.
         </p>
@@ -72,7 +73,7 @@ export default function Hero() {
       {/* Индикатор прокрутки */}
       <div
         className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-fade-in"
-        style={{ animationDelay: '1.5s' }}
+        style={{ animationDelay: "1.5s" }}
       >
         <div className="text-white/80 cursor-pointer hover:text-accent transition-colors animate-bounce">
           <ChevronDown size={32} />

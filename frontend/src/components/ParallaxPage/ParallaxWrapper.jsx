@@ -1,6 +1,6 @@
 // src/components/ParallaxWrapper.jsx
-import React, { useEffect, useRef } from 'react';
-import styles from './ParallaxPage.module.css';
+import React, { useEffect, useRef } from "react";
+import styles from "./ParallaxPage.module.css";
 
 export function ParallaxWrapper({ children }) {
   const mainRef = useRef();
@@ -14,15 +14,16 @@ export function ParallaxWrapper({ children }) {
       const contentH = wrapperRef.current.offsetHeight - winH - footerH;
       const docH = winH + contentH + footerH - 20;
 
-      document.getElementById('scroll-animate').style.height = `${docH}px`;
+      document.getElementById("scroll-animate").style.height = `${docH}px`;
       mainRef.current.style.height = `${docH}px`;
-      mainRef.current.style.top = '0px';
+      mainRef.current.style.top = "0px";
       wrapperRef.current.style.marginTop = `${winH}px`;
       const scrollY = window.scrollY;
-      footerRef.current.style.bottom = scrollY >= footerH ? '0px' : `-${footerH}px`;
+      footerRef.current.style.bottom =
+        scrollY >= footerH ? "0px" : `-${footerH}px`;
     };
     updateSizes();
-    window.addEventListener('resize', updateSizes);
+    window.addEventListener("resize", updateSizes);
 
     const onScroll = () => {
       const scrollY = window.scrollY;
@@ -30,19 +31,24 @@ export function ParallaxWrapper({ children }) {
       const docH = mainRef.current.offsetHeight;
 
       mainRef.current.style.top = `-${scrollY}px`;
-      footerRef.current.style.bottom = scrollY >= footerH ? '0px' : `-${footerH}px`;
+      footerRef.current.style.bottom =
+        scrollY >= footerH ? "0px" : `-${footerH}px`;
     };
-    window.addEventListener('scroll', onScroll);
+    window.addEventListener("scroll", onScroll);
 
     return () => {
-      window.removeEventListener('resize', updateSizes);
-      window.removeEventListener('scroll', onScroll);
+      window.removeEventListener("resize", updateSizes);
+      window.removeEventListener("scroll", onScroll);
     };
   }, []);
 
   return (
     <div id="scroll-animate" className={styles.scrollAnimate}>
-      <div id="scroll-animate-main" className={styles.scrollAnimateMain} ref={mainRef}>
+      <div
+        id="scroll-animate-main"
+        className={styles.scrollAnimateMain}
+        ref={mainRef}
+      >
         <div className={styles.wrapperParallax} ref={wrapperRef}>
           {children}
           <footer ref={footerRef} className={styles.footer}>

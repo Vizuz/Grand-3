@@ -1,10 +1,10 @@
 // Gallery.jsx
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef } from "react";
 // import inView from 'in-view';  // removed in favor of IntersectionObserver
-import styles from './gallery.module.css';  // <- импорт модуля
+import styles from "./gallery.module.css"; // <- импорт модуля
 
 const images = [
-  'https://storage.yandexcloud.net/vizuz/1-sec.webp',
+  "https://storage.yandexcloud.net/vizuz/1-sec.webp",
   // ...
 ];
 
@@ -13,8 +13,8 @@ export default function Gallery() {
 
   useEffect(() => {
     const observer = new IntersectionObserver(
-      entries => {
-        entries.forEach(entry => {
+      (entries) => {
+        entries.forEach((entry) => {
           if (entry.isIntersecting) {
             entry.target.classList.add(styles.active);
           } else {
@@ -22,10 +22,10 @@ export default function Gallery() {
           }
         });
       },
-      { threshold: 0.25 }
+      { threshold: 0.25 },
     );
 
-    containerRefs.current.forEach(el => {
+    containerRefs.current.forEach((el) => {
       if (el) observer.observe(el);
     });
 
@@ -40,14 +40,12 @@ export default function Gallery() {
         <section className={styles.row} key={i}>
           <div
             className={styles.container}
-            ref={el => (containerRefs.current[i] = el)}
+            ref={(el) => (containerRefs.current[i] = el)}
           >
             <img src={src} alt="" className={styles.image} />
           </div>
         </section>
       ))}
-
-      
     </>
   );
 }

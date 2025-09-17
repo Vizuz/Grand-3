@@ -1,31 +1,34 @@
-import React, { useState } from 'react';
-import { Shield, User, Lock, AlertCircle } from 'lucide-react';
+import React, { useState } from "react";
+import { Shield, User, Lock, AlertCircle } from "lucide-react";
 
 export default function AdminLogin({ onLogin }) {
-  const [credentials, setCredentials] = useState({ username: '', password: '' });
-  const [error, setError] = useState('');
+  const [credentials, setCredentials] = useState({
+    username: "",
+    password: "",
+  });
+  const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-    setError('');
+    setError("");
 
     const success = onLogin(credentials);
-    
+
     if (!success) {
-      setError('Неверные данные для входа');
+      setError("Неверные данные для входа");
     }
-    
+
     setLoading(false);
   };
 
   const handleChange = (e) => {
     setCredentials({
       ...credentials,
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
     });
-    setError('');
+    setError("");
   };
 
   return (
@@ -36,7 +39,9 @@ export default function AdminLogin({ onLogin }) {
             <div className="w-16 h-16 bg-accent/10 rounded-full flex items-center justify-center mx-auto mb-4">
               <Shield className="w-8 h-8 text-accent" />
             </div>
-            <h1 className="text-2xl font-bold text-primary-900 mb-2">Админ-панель GRAND</h1>
+            <h1 className="text-2xl font-bold text-primary-900 mb-2">
+              Админ-панель GRAND
+            </h1>
             <p className="text-gray-600">Войдите для управления сайтом</p>
           </div>
 
@@ -89,14 +94,16 @@ export default function AdminLogin({ onLogin }) {
               disabled={loading}
               className="w-full bg-accent hover:bg-accent-600 text-white px-6 py-3 rounded-lg  transition-colors disabled:opacity-50"
             >
-              {loading ? 'Вход...' : 'Войти'}
+              {loading ? "Вход..." : "Войти"}
             </button>
           </form>
 
           <div className="mt-6 text-center">
             <div className="text-sm text-gray-500 bg-blue-50 p-4 rounded-lg">
-              <strong>Тестовые данные:</strong><br />
-              Логин: admin<br />
+              <strong>Тестовые данные:</strong>
+              <br />
+              Логин: admin
+              <br />
               Пароль: grand123
             </div>
           </div>

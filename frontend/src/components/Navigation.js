@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
-import { FaWhatsapp } from 'react-icons/fa';
+import React, { useState, useEffect } from "react";
+import { Link, useLocation } from "react-router-dom";
+import { FaWhatsapp } from "react-icons/fa";
 import { IoLogoWhatsapp } from "react-icons/io";
 
 export default function Navigation() {
@@ -10,9 +10,9 @@ export default function Navigation() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const location = useLocation();
 
-  const BRAND_COLOR = '#ce9270';
-  const isHomePage = location.pathname === '/';
-  const isAboutPage = location.pathname === '/about';
+  const BRAND_COLOR = "#ce9270";
+  const isHomePage = location.pathname === "/";
+  const isAboutPage = location.pathname === "/about";
   /* ————————— СКРОЛЛ ————————— */
   useEffect(() => {
     const handleScroll = () => {
@@ -28,22 +28,25 @@ export default function Navigation() {
       setPrevScrollPos(currentScrollPos);
     };
 
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, [prevScrollPos, mobileMenuOpen]);
 
   /* ————————— Блокировка скролла при открытом меню ————————— */
   useEffect(() => {
-    document.documentElement.classList.toggle('overflow-hidden', mobileMenuOpen);
+    document.documentElement.classList.toggle(
+      "overflow-hidden",
+      mobileMenuOpen,
+    );
   }, [mobileMenuOpen]);
 
   const darkHeader = isScrolled || mobileMenuOpen;
 
   const navItems = [
-    { href: '/', label: 'Главная' },
-    { href: '/about', label: 'О компании' },
-    { href: '/apartments', label: 'Квартиры' },
-    { href: '/contacts', label: 'Контакты' },
+    { href: "/", label: "Главная" },
+    { href: "/about", label: "О компании" },
+    { href: "/apartments", label: "Квартиры" },
+    { href: "/contacts", label: "Контакты" },
   ];
 
   /* ————————— Бургер-крестик ————————— */
@@ -51,12 +54,12 @@ export default function Navigation() {
     <div className="relative w-7 h-7">
       <span
         className={`absolute left-0 top-1/2 w-full h-0.5 bg-current transition-transform duration-300 ${
-          open ? 'rotate-45' : '-translate-y-1.5'
+          open ? "rotate-45" : "-translate-y-1.5"
         }`}
       />
       <span
         className={`absolute left-0 top-1/2 w-full h-0.5 bg-current transition-transform duration-300 ${
-          open ? '-rotate-45' : 'translate-y-1.5'
+          open ? "-rotate-45" : "translate-y-1.5"
         }`}
       />
     </div>
@@ -68,10 +71,14 @@ export default function Navigation() {
       <nav
         className={`
           fixed top-0 left-0 right-0 z-50 transition-all duration-200
-          ${visible || mobileMenuOpen ? 'translate-y-0' : '-translate-y-full'}
-          ${(isHomePage || isAboutPage)
-            ? (darkHeader ? 'bg-[#FFFFFF]' : 'bg-transparent')
-            : 'bg-[#FFFFFF]'}
+          ${visible || mobileMenuOpen ? "translate-y-0" : "-translate-y-full"}
+          ${
+            isHomePage || isAboutPage
+              ? darkHeader
+                ? "bg-[#FFFFFF]"
+                : "bg-transparent"
+              : "bg-[#FFFFFF]"
+          }
           
         `}
       >
@@ -80,7 +87,10 @@ export default function Navigation() {
             {/* Логотип */}
             <Link to="/" className="flex items-center">
               <img
-                src={process.env.PUBLIC_URL + 'https://storage.yandexcloud.net/vizuz/logo.webp'}
+                src={
+                  process.env.PUBLIC_URL +
+                  "https://storage.yandexcloud.net/vizuz/logo.webp"
+                }
                 alt="GRAND Logo"
                 className="h-16 w-auto"
               />
@@ -92,9 +102,11 @@ export default function Navigation() {
                 const isActive = location.pathname === item.href;
                 const linkColor = isActive
                   ? BRAND_COLOR
-                  : (isHomePage || isAboutPage)
-                    ? (darkHeader ? '#000' : '#FFF')
-                    : '#000';
+                  : isHomePage || isAboutPage
+                    ? darkHeader
+                      ? "#000"
+                      : "#FFF"
+                    : "#000";
 
                 return (
                   <Link
@@ -114,11 +126,14 @@ export default function Navigation() {
               onClick={() => setMobileMenuOpen((o) => !o)}
               className="md:hidden p-2 transition-colors duration-300 hover:text-[#ce9270]"
               style={{
-                color: (isHomePage || isAboutPage)
-                  ? (darkHeader ? '#000' : '#FFF')
-                  : '#000',
+                color:
+                  isHomePage || isAboutPage
+                    ? darkHeader
+                      ? "#000"
+                      : "#FFF"
+                    : "#000",
               }}
-              aria-label={mobileMenuOpen ? 'Закрыть меню' : 'Открыть меню'}
+              aria-label={mobileMenuOpen ? "Закрыть меню" : "Открыть меню"}
             >
               <Burger open={mobileMenuOpen} />
             </button>
@@ -157,19 +172,17 @@ export default function Navigation() {
           </div>
 
           {/* Контакты внизу мобильного меню */}
-          
+
           <div className="space-y-1 pb-8">
-            <div className='pb-4'>
-            <a
-              href="tel:+77006512373"
-              className="block text-lg font-medium hover:opacity-80"
-              onClick={(e) => e.stopPropagation()}
-            >
-              +7 (700) 651-23-73
-            </a>
-            <p className="text-sm text-gray-500">
-              Пн–Пт: 9:00–18:00
-            </p>
+            <div className="pb-4">
+              <a
+                href="tel:+77006512373"
+                className="block text-lg font-medium hover:opacity-80"
+                onClick={(e) => e.stopPropagation()}
+              >
+                +7 (700) 651-23-73
+              </a>
+              <p className="text-sm text-gray-500">Пн–Пт: 9:00–18:00</p>
             </div>
             <a
               href="https://wa.me/77006512373"
@@ -178,9 +191,8 @@ export default function Navigation() {
               className="block text-2xl hover:opacity-80"
               onClick={(e) => e.stopPropagation()}
             >
-             <IoLogoWhatsapp className="w-8 h-8 text-primary-600 flex-shrink-0 mr-4 mt-1"/>
+              <IoLogoWhatsapp className="w-8 h-8 text-primary-600 flex-shrink-0 mr-4 mt-1" />
             </a>
-            
           </div>
         </div>
       )}

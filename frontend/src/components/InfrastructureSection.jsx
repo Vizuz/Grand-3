@@ -1,32 +1,32 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect } from "react";
 import {
   Archive,
   Baby,
   MapPin,
   ShoppingCart,
   TreeDeciduous,
-} from 'lucide-react';
+} from "lucide-react";
 
 const cards = [
   {
     Icon: TreeDeciduous,
-    title: 'Озеленённая зона',
-    text: 'Больше зелени во дворе для свежего воздуха и отдыха',
+    title: "Озеленённая зона",
+    text: "Больше зелени во дворе для свежего воздуха и отдыха",
   },
   {
     Icon: Baby,
-    title: 'Детская и спортивная площадка',
-    text: 'В наших ЖК предусмотрены детские и спортивные площадки для активного отдыха',
+    title: "Детская и спортивная площадка",
+    text: "В наших ЖК предусмотрены детские и спортивные площадки для активного отдыха",
   },
   {
     Icon: MapPin,
-    title: 'Паркинг',
-    text: 'Удобная парковка для жителей и гостей комплекса',
+    title: "Паркинг",
+    text: "Удобная парковка для жителей и гостей комплекса",
   },
   {
     Icon: ShoppingCart,
-    title: 'Супермаркет, кафе и сервисы',
-    text: 'Расположены на первых этажах домов для удобства жителей',
+    title: "Супермаркет, кафе и сервисы",
+    text: "Расположены на первых этажах домов для удобства жителей",
   },
 ];
 
@@ -40,15 +40,18 @@ export default function InfrastructureSection() {
         sectionRef.current.style.backgroundPosition = `center ${-y}px`;
       }
     };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   return (
     <section
       ref={sectionRef}
       className="relative bg-cover bg-center py-32"
-      style={{ backgroundImage: "url('https://storage.yandexcloud.net/vizuz/bg-inf.webp')" }}
+      style={{
+        backgroundImage:
+          "url('https://storage.yandexcloud.net/vizuz/bg-inf.webp')",
+      }}
     >
       {/* заголовок */}
       <h2 className="text-5xl lg:text-6xl font-semibold text-white text-center mb-24">
@@ -68,9 +71,7 @@ export default function InfrastructureSection() {
               <h3 className="text-3xl font-medium text-gray-900 mb-4">
                 {title}
               </h3>
-              <p className="text-lg text-gray-700 leading-relaxed">
-                {text}
-              </p>
+              <p className="text-lg text-gray-700 leading-relaxed">{text}</p>
             </div>
           ))}
         </div>

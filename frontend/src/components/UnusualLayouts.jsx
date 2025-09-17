@@ -1,36 +1,56 @@
-import React, { useState, useRef, useEffect } from 'react';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
+import React, { useState, useRef, useEffect } from "react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 
 const initialPlans = [
-  { title: 'Ванные с окном',               image: 'https://storage.yandexcloud.net/vizuz/ванная.webp',    caption: 'Наблюдение за городом из тёплой ванной' },
-  { title: 'Кухни‑гостиные с 3 и 4 окнами', image: 'https://storage.yandexcloud.net/vizuz/кухня.webp',    caption: 'Для встреч семьи и приёма гостей' },
-  { title: 'Мастер‑спальни с 2 окнами',     image: 'https://storage.yandexcloud.net/vizuz/спальня.webp',   caption: 'Захватывающие виды на ночной город' },
-  { title: 'Студии с островом',            image: 'https://storage.yandexcloud.net/vizuz/пентхаус.webp',  caption: 'Максимум пространства для жизни и творчества' },
-  { title: 'Двухуровневые лофты',          image: 'https://storage.yandexcloud.net/vizuz/детская.webp',   caption: 'Свобода планировки и высокий потолок' },
+  {
+    title: "Ванные с окном",
+    image: "https://storage.yandexcloud.net/vizuz/ванная.webp",
+    caption: "Наблюдение за городом из тёплой ванной",
+  },
+  {
+    title: "Кухни‑гостиные с 3 и 4 окнами",
+    image: "https://storage.yandexcloud.net/vizuz/кухня.webp",
+    caption: "Для встреч семьи и приёма гостей",
+  },
+  {
+    title: "Мастер‑спальни с 2 окнами",
+    image: "https://storage.yandexcloud.net/vizuz/спальня.webp",
+    caption: "Захватывающие виды на ночной город",
+  },
+  {
+    title: "Студии с островом",
+    image: "https://storage.yandexcloud.net/vizuz/пентхаус.webp",
+    caption: "Максимум пространства для жизни и творчества",
+  },
+  {
+    title: "Двухуровневые лофты",
+    image: "https://storage.yandexcloud.net/vizuz/детская.webp",
+    caption: "Свобода планировки и высокий потолок",
+  },
 ];
 
 export default function UnusualLayouts({ headerTitle, headerText, headerBar }) {
-  const [plans, setPlans]       = useState(initialPlans);
-  const [offset, setOffset]     = useState(0);
-  const [isAnimating, setAnim]  = useState(false);
-  const [index, setIndex]       = useState(0);
-  const [visibleCount, setVC]   = useState(3);
-  const timerRef                = useRef(null);
+  const [plans, setPlans] = useState(initialPlans);
+  const [offset, setOffset] = useState(0);
+  const [isAnimating, setAnim] = useState(false);
+  const [index, setIndex] = useState(0);
+  const [visibleCount, setVC] = useState(3);
+  const timerRef = useRef(null);
 
   // Меняем число видимых слайдов в зависимости от ширины окна
   useEffect(() => {
     const updateVC = () => {
       const w = window.innerWidth;
-      if (w < 1000)        setVC(1);
-      else if (w < 1500)  setVC(2);
-      else                setVC(3);
+      if (w < 1000) setVC(1);
+      else if (w < 1500) setVC(2);
+      else setVC(3);
     };
     updateVC();
-    window.addEventListener('resize', updateVC);
-    return () => window.removeEventListener('resize', updateVC);
+    window.addEventListener("resize", updateVC);
+    return () => window.removeEventListener("resize", updateVC);
   }, []);
 
-  const total    = initialPlans.length;
+  const total = initialPlans.length;
   const slidePct = 100 / visibleCount;
 
   // Автопрокрутка
@@ -42,7 +62,7 @@ export default function UnusualLayouts({ headerTitle, headerText, headerBar }) {
 
   function handleNext() {
     if (isAnimating) return;
-    setIndex(i => (i + 1) % total);
+    setIndex((i) => (i + 1) % total);
     setAnim(true);
     setOffset(-slidePct);
   }
@@ -50,7 +70,7 @@ export default function UnusualLayouts({ headerTitle, headerText, headerBar }) {
   function handlePrev() {
     if (isAnimating) return;
     clearInterval(timerRef.current);
-    setPlans(p => {
+    setPlans((p) => {
       const last = p[p.length - 1];
       return [last, ...p.slice(0, -1)];
     });
@@ -64,7 +84,7 @@ export default function UnusualLayouts({ headerTitle, headerText, headerBar }) {
 
   const onTransitionEnd = () => {
     if (offset === -slidePct) {
-      setPlans(p => {
+      setPlans((p) => {
         const [first, ...rest] = p;
         return [...rest, first];
       });
@@ -74,24 +94,24 @@ export default function UnusualLayouts({ headerTitle, headerText, headerBar }) {
   };
 
   // Для прогресс‑бара
-  const miniWidth  = `${100 / total}%`;
+  const miniWidth = `${100 / total}%`;
   const miniOffset = `${index * 100}%`;
 
   return (
     <section className="relative bg-white w-full overflow-hidden py-32">
-  <div className="flex flex-col lg:flex-row justify-between items-start py-[50px] lg:py-[150px]">
-    {/* Левый заголовок */}
-    <h2 className="pl-8 text-3xl lg:text-5xl font-bold mb-8">
-      {headerTitle}
-    </h2>
-    {/* Правый текст (на маленьких — под заголовком) */}
-    <p className="pl-8 pr-8 text-md font-medium mb-8 max-w-md">
-      {headerText}
-    </p>
-  </div>
-        <div>
+      <div className="flex flex-col lg:flex-row justify-between items-start py-[50px] lg:py-[150px]">
+        {/* Левый заголовок */}
+        <h2 className="pl-8 text-3xl lg:text-5xl font-bold mb-8">
+          {headerTitle}
+        </h2>
+        {/* Правый текст (на маленьких — под заголовком) */}
+        <p className="pl-8 pr-8 text-md font-medium mb-8 max-w-md">
+          {headerText}
+        </p>
+      </div>
+      <div>
         <h2 className=" px-8 text-md font-bold mb-8">{headerBar}</h2>
-        </div>
+      </div>
       {/* прогресс‑бар */}
       <div className="h-[2px] bg-gray-200 w-full mb-6">
         <div
@@ -104,7 +124,7 @@ export default function UnusualLayouts({ headerTitle, headerText, headerBar }) {
       <div className="relative w-full overflow-hidden">
         <div
           onTransitionEnd={onTransitionEnd}
-          className={`flex ${isAnimating ? 'transition-transform duration-500 ease-out' : ''}`}
+          className={`flex ${isAnimating ? "transition-transform duration-500 ease-out" : ""}`}
           style={{ transform: `translateX(${offset}%)` }}
         >
           {plans.slice(0, visibleCount + 1).map((plan, i) => (
@@ -133,13 +153,11 @@ export default function UnusualLayouts({ headerTitle, headerText, headerBar }) {
                         transparent 200px,
                         transparent 40px
                       )`,
-                      backgroundSize: '100% 12px',
+                      backgroundSize: "100% 12px",
                     }}
                   />
                 </div>
-                <p className="text-center text-gray-700">
-                  {plan.caption}
-                </p>
+                <p className="text-center text-gray-700">{plan.caption}</p>
               </div>
             </div>
           ))}

@@ -1,27 +1,28 @@
 /* ParallaxGallery.jsx */
-import React, { useRef, useState, useEffect } from 'react';
-import styles from './ParallaxProject.module.css';
-import { Link } from 'react-router-dom';
+import React, { useRef, useState, useEffect } from "react";
+import styles from "./ParallaxProject.module.css";
+import { Link } from "react-router-dom";
 // Пример данных для галереи
 const items = [
   {
-    title: 'AQBIDAI 4',
-    content: 'Пятиэтажный П-образный многоквартирный дом: 115 квартир, ул. Кенжетаева 24',
-    image: 'https://storage.yandexcloud.net/vizuz/aqbidai-house.webp',
-    sectionId: 'aqbidai-info',     
+    title: "AQBIDAI 4",
+    content:
+      "Пятиэтажный П-образный многоквартирный дом: 115 квартир, ул. Кенжетаева 24",
+    image: "https://storage.yandexcloud.net/vizuz/aqbidai-house.webp",
+    sectionId: "aqbidai-info",
   },
   {
-    title: 'ЭДЕМ',
-    content: 'Девятиэтажный многоквартирный дом: 80 квартир, ул. Васильковский 18/1',
-    image: 'https://storage.yandexcloud.net/vizuz/adem-16.webp',
-    sectionId: 'edem-info', 
+    title: "ЭДЕМ",
+    content:
+      "Девятиэтажный многоквартирный дом: 80 квартир, ул. Васильковский 18/1",
+    image: "https://storage.yandexcloud.net/vizuz/adem-16.webp",
+    sectionId: "edem-info",
   },
- 
 ];
 
 export default function ParallaxProject() {
   return (
-    <div className='pt-32'>
+    <div className="pt-32">
       <h2 className="text-center text-3xl sm:text-4xl lg:text-5xl font-bold mb-6 transition-all duration-700 ease-out opacity-100 translate-y-0">
         Строящиеся ЖК Grand Komfort Stroy
       </h2>
@@ -55,7 +56,7 @@ function Card({ title, content, image, sectionId }) {
     return () => clearTimeout(leaveTimeout);
   }, []);
 
-  const handleMouseMove = e => {
+  const handleMouseMove = (e) => {
     const rect = cardRef.current.getBoundingClientRect();
     const mx = e.clientX - rect.left - dims.w / 2;
     const my = e.clientY - rect.top - dims.h / 2;
@@ -73,15 +74,12 @@ function Card({ title, content, image, sectionId }) {
   const tY = py * -40;
 
   return (
-    
     <div
       className={styles.cardWrap}
       ref={cardRef}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
     >
-      
-      
       <div
         className={styles.card}
         style={{ transform: `rotateY(${rY}deg) rotateX(${rX}deg)` }}
@@ -90,32 +88,28 @@ function Card({ title, content, image, sectionId }) {
           className={styles.cardBg}
           style={{
             backgroundImage: `url(${image})`,
-            transform: `translateX(${tX}px) translateY(${tY}px)`
+            transform: `translateX(${tX}px) translateY(${tY}px)`,
           }}
         />
         <div className={styles.cardInfo}>
           <h1>{title}</h1>
-          
+
           <div className={styles.buttonGroup}>
-            
-              <button
-                className={styles.btnMore}
-                onClick={() => {
-                  const el = document.getElementById(sectionId);
-                  if (el) {
-                    el.scrollIntoView({ behavior: 'smooth' });
-                  }
-                }}
-              >
-                Узнать больше
-              </button>
-            
-            
-            <Link to="/apartments" >
+            <button
+              className={styles.btnMore}
+              onClick={() => {
+                const el = document.getElementById(sectionId);
+                if (el) {
+                  el.scrollIntoView({ behavior: "smooth" });
+                }
+              }}
+            >
+              Узнать больше
+            </button>
+
+            <Link to="/apartments">
               <button className={styles.btnCatalog}>Каталог квартир</button>
             </Link>
-            
-            
           </div>
           <p>{content}</p>
         </div>

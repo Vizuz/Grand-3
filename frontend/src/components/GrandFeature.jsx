@@ -1,10 +1,10 @@
-import React from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import React from "react";
+import { Link, useLocation } from "react-router-dom";
 export default function SoulFeature() {
   const images = [
-    'https://storage.yandexcloud.net/vizuz/book.webp',
-    'https://storage.yandexcloud.net/vizuz/music.webp',
-    'https://storage.yandexcloud.net/vizuz/dog.webp',
+    "https://storage.yandexcloud.net/vizuz/book.webp",
+    "https://storage.yandexcloud.net/vizuz/music.webp",
+    "https://storage.yandexcloud.net/vizuz/dog.webp",
   ];
 
   return (
@@ -53,23 +53,22 @@ export default function SoulFeature() {
               Сделайте свой дом маленьким раем
             </h2>
             <Link to="/apartments">
-            <button
-              
-              className="w-full sm:w-auto text-lg sm:text-base
+              <button
+                className="w-full sm:w-auto text-lg sm:text-base
                          px-6 py-4 sm:py-3
                          border-2 border-black
                          text-black hover:bg-black hover:text-white
                          transition"
-
-            >
-              Каталог квартир
-            </button>
+              >
+                Каталог квартир
+              </button>
             </Link>
           </div>
           <div className="text-gray-700">
             <p>
-              Grand Komfort Stroy предлагает квартиры с одной, двумя и тремя спальнями. 
-Каждая планировка создана для максимального комфорта и удобства семьи.
+              Grand Komfort Stroy предлагает квартиры с одной, двумя и тремя
+              спальнями. Каждая планировка создана для максимального комфорта и
+              удобства семьи.
             </p>
           </div>
         </div>

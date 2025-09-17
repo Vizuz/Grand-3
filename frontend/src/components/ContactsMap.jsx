@@ -1,16 +1,16 @@
 // src/components/ContactsMap.jsx
-import React, { useEffect } from 'react';
+import React, { useEffect } from "react";
 
 export default function ContactsMap() {
   useEffect(() => {
     // 1) подключаем 2GIS
-    const s = document.createElement('script');
-    s.src   = 'https://maps.api.2gis.ru/2.0/loader.js?pkg=full';
+    const s = document.createElement("script");
+    s.src = "https://maps.api.2gis.ru/2.0/loader.js?pkg=full";
     s.async = true;
     document.body.appendChild(s);
 
     // 2) базовые стили: тайлы + прячем ссылку «↗» + сбрасываем штатный контрол
-    const style = document.createElement('style');
+    const style = document.createElement("style");
     style.textContent = `
       /* серые тайлы */
       #map-container img.leaflet-tile {
@@ -60,7 +60,7 @@ export default function ContactsMap() {
         const coords = [53.300639, 69.397291];
 
         // 3) инициализируем карту без штатного зума
-        const map = window.DG.map('map-container', {
+        const map = window.DG.map("map-container", {
           center: coords,
           zoom: 17,
           scrollWheelZoom: false,
@@ -70,15 +70,15 @@ export default function ContactsMap() {
         // 4) добавляем маркер
         window.DG.marker(coords, {
           icon: window.DG.icon({
-            iconUrl: 'https://storage.yandexcloud.net/vizuz/logo-invs.webp',
-            iconSize:   [60, 60],
+            iconUrl: "https://storage.yandexcloud.net/vizuz/logo-invs.webp",
+            iconSize: [60, 60],
             iconAnchor: [30, 60],
-          })
+          }),
         }).addTo(map);
 
         // 5) создаём свой контрол
-        const zoomWrapper = document.createElement('div');
-        zoomWrapper.className = 'custom-zoom';
+        const zoomWrapper = document.createElement("div");
+        zoomWrapper.className = "custom-zoom";
         zoomWrapper.innerHTML = `
           <button id="zoom-in" title="Приблизить">+</button>
           <button id="zoom-out" title="Отдалить">−</button>
@@ -87,8 +87,8 @@ export default function ContactsMap() {
         map.getContainer().appendChild(zoomWrapper);
 
         // 6) вешаем обработчики событий
-        document.getElementById('zoom-in').onclick = () => map.zoomIn();
-        document.getElementById('zoom-out').onclick = () => map.zoomOut();
+        document.getElementById("zoom-in").onclick = () => map.zoomIn();
+        document.getElementById("zoom-out").onclick = () => map.zoomOut();
       });
     };
   }, []);
@@ -97,11 +97,9 @@ export default function ContactsMap() {
     <div
       id="map-container"
       style={{
-
-
-        height:       '100%',
+        height: "100%",
         // borderRadius: '1rem',
-        overflow:     'hidden',
+        overflow: "hidden",
         // boxShadow:    '0 4px 15px rgba(0,0,0,0.1)',
       }}
     />

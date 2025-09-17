@@ -1,10 +1,19 @@
-import React, { useState, useEffect } from 'react';
-import { useParams, Link } from 'react-router-dom';
-import { ArrowLeft, Home, Maximize, Building2, Building, MapPin, Phone, Mail } from 'lucide-react';
-import Navigation from '../components/Navigation';
-import Footer from '../components/Footer';
-import MortgageCalculator from '../components/MortgageCalculator';
-import { useData } from '../context/DataContext';
+import React, { useState, useEffect } from "react";
+import { useParams, Link } from "react-router-dom";
+import {
+  ArrowLeft,
+  Home,
+  Maximize,
+  Building2,
+  Building,
+  MapPin,
+  Phone,
+  Mail,
+} from "lucide-react";
+import Navigation from "../components/Navigation";
+import Footer from "../components/Footer";
+import MortgageCalculator from "../components/MortgageCalculator";
+import { useData } from "../context/DataContext";
 import { IoLogoWhatsapp } from "react-icons/io";
 export default function ApartmentDetailPage() {
   const { id } = useParams();
@@ -14,7 +23,7 @@ export default function ApartmentDetailPage() {
 
   useEffect(() => {
     if (apartments && apartments.length > 0) {
-      const apt = apartments.find(apt => String(apt.id) === String(id));
+      const apt = apartments.find((apt) => String(apt.id) === String(id));
       setApartment(apt || null);
       setCurrentImageIndex(0);
     }
@@ -40,20 +49,20 @@ export default function ApartmentDetailPage() {
   }
 
   const formatPrice = (price) => {
-    return new Intl.NumberFormat('ru-RU', {
-      style: 'currency',
-      currency: 'KZT',
-      currencyDisplay: 'narrowSymbol',
+    return new Intl.NumberFormat("ru-RU", {
+      style: "currency",
+      currency: "KZT",
+      currencyDisplay: "narrowSymbol",
       minimumFractionDigits: 0,
     }).format(price);
   };
-const formatPricePerSqm = (price) => {
-  if (price == null || isNaN(price)) return '—';
-  return new Intl.NumberFormat('ru-RU', {
-    minimumFractionDigits: 0,
-    maximumFractionDigits: 0,    // добавили
-  }).format(price);
-};
+  const formatPricePerSqm = (price) => {
+    if (price == null || isNaN(price)) return "—";
+    return new Intl.NumberFormat("ru-RU", {
+      minimumFractionDigits: 0,
+      maximumFractionDigits: 0, // добавили
+    }).format(price);
+  };
   // Вычисляем цену за м²: либо из поля apartment.pricePerSqm, либо считаем сами
   const pricePerSqmValue =
     apartment.pricePerSqm != null
@@ -65,12 +74,12 @@ const formatPricePerSqm = (price) => {
   return (
     <div className="min-h-screen bg-neutral-light">
       <Navigation />
-      
+
       {/* Header */}
       <section className="pt-40 pb-8 luxury-gradient">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center mb-6">
-            <Link 
+            <Link
               to="/apartments"
               className="flex items-center text-white hover:text-accent transition-colors mr-6"
             >
@@ -78,7 +87,7 @@ const formatPricePerSqm = (price) => {
               Назад к каталогу
             </Link>
           </div>
-          
+
           <div className="text-white">
             <h1 className="text-3xl lg:text-5xl font-bold font-serif mb-4">
               Квартира №{apartment.number}
@@ -107,7 +116,7 @@ const formatPricePerSqm = (price) => {
                     Нет фото
                   </div>
                 )}
-                
+
                 {apartment.isNew && (
                   <div className="absolute top-6 left-6">
                     <span className="bg-accent text-white px-4 py-2 rounded-full">
@@ -116,7 +125,7 @@ const formatPricePerSqm = (price) => {
                   </div>
                 )}
               </div>
-              
+
               {/* Thumbnail Gallery */}
               {apartment.images && apartment.images.length > 1 && (
                 <div className="p-4 flex space-x-4 overflow-x-auto">
@@ -125,7 +134,9 @@ const formatPricePerSqm = (price) => {
                       key={index}
                       onClick={() => setCurrentImageIndex(index)}
                       className={`flex-shrink-0 w-20 h-20 rounded-lg overflow-hidden border-2 transition-all ${
-                        index === currentImageIndex ? 'border-accent' : 'border-gray-200'
+                        index === currentImageIndex
+                          ? "border-accent"
+                          : "border-gray-200"
                       }`}
                     >
                       <img
@@ -141,25 +152,31 @@ const formatPricePerSqm = (price) => {
 
             {/* Apartment Details */}
             <div className="bg-white rounded-lg shadow-lg p-8 mb-8">
-              <h2 className="text-2xl font-bold text-primary-900 mb-6">Характеристики</h2>
-              
+              <h2 className="text-2xl font-bold text-primary-900 mb-6">
+                Характеристики
+              </h2>
+
               <div className="grid md:grid-cols-2 gap-6">
                 <div className="flex items-center p-4 bg-gray-50 rounded-lg">
                   <Home className="w-8 h-8 text-accent mr-4" />
                   <div>
                     <div className="text-sm text-gray-600">Комнаты</div>
-                    <div className="text-xl font-bold text-primary-900">{apartment.rooms}</div>
+                    <div className="text-xl font-bold text-primary-900">
+                      {apartment.rooms}
+                    </div>
                   </div>
                 </div>
-                
+
                 <div className="flex items-center p-4 bg-gray-50 rounded-lg">
                   <Maximize className="w-8 h-8 text-accent mr-4" />
                   <div>
                     <div className="text-sm text-gray-600">Площадь</div>
-                    <div className="text-xl font-bold text-primary-900">{apartment.area} м²</div>
+                    <div className="text-xl font-bold text-primary-900">
+                      {apartment.area} м²
+                    </div>
                   </div>
                 </div>
-                
+
                 <div className="flex items-center p-4 bg-gray-50 rounded-lg">
                   <Building2 className="w-8 h-8 text-accent mr-4" />
                   <div>
@@ -169,12 +186,14 @@ const formatPricePerSqm = (price) => {
                     </div>
                   </div>
                 </div>
-                
+
                 <div className="flex items-center p-4 bg-gray-50 rounded-lg">
-                 <Building className="w-8 h-8 text-accent mr-4" />
+                  <Building className="w-8 h-8 text-accent mr-4" />
                   <div>
                     <div className="text-sm text-gray-600">Жилой комплекс</div>
-                    <div className="text-xl font-bold text-primary-900">{apartment.project}</div>
+                    <div className="text-xl font-bold text-primary-900">
+                      {apartment.project}
+                    </div>
                   </div>
                 </div>
               </div>
@@ -182,20 +201,21 @@ const formatPricePerSqm = (price) => {
 
             {/* Features */}
             {apartment.features && apartment.features.length > 0 && (
-  <div className="bg-white rounded-lg shadow-lg p-8">
-    <h2 className="text-2xl font-bold text-primary-900 mb-6">Особенности</h2>
-    
-    <div className="grid md:grid-cols-2 gap-4">
-      {apartment.features.map((feature, index) => (
-        <div key={index} className="flex items-center">
-          <div className="w-3 h-3 bg-accent rounded-full mr-3" />
-          <span className="text-gray-700">{feature}</span>
-        </div>
-      ))}
-    </div>
-  </div>
-)}
+              <div className="bg-white rounded-lg shadow-lg p-8">
+                <h2 className="text-2xl font-bold text-primary-900 mb-6">
+                  Особенности
+                </h2>
 
+                <div className="grid md:grid-cols-2 gap-4">
+                  {apartment.features.map((feature, index) => (
+                    <div key={index} className="flex items-center">
+                      <div className="w-3 h-3 bg-accent rounded-full mr-3" />
+                      <span className="text-gray-700">{feature}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
           </div>
 
           {/* Sidebar */}
@@ -218,41 +238,37 @@ const formatPricePerSqm = (price) => {
                 >
                   Оставить заявку
                 </Link>
-                
               </div>
-              
+
               {/* Contact Info */}
               <div className="border-t pt-6">
                 <h3 className="text-primary-900 mb-4">Связаться с нами</h3>
                 <div className="space-y-3">
-  <div className="flex items-center">
-    <Phone className="w-6 h-6 mr-3 text-accent" />
-    <a
-      href="tel:+77006512373"
-      className="block text-lg font-medium hover:opacity-80"
-      onClick={(e) => e.stopPropagation()}
-    >
-      +7 (700) 651-23-73
-    </a>
-  </div>
-  <div className="flex items-center">
-    <a
-      href="https://wa.me/77006512373"
-      target="_blank"
-      rel="noopener noreferrer"
-      onClick={(e) => e.stopPropagation()}
-      className="flex items-center space-x-2 text-lg hover:opacity-80"
-    >
-      <IoLogoWhatsapp className="w-6 h-6 text-primary-600 flex-shrink-0" />
-      <span>WhatsApp</span>
-    </a>
-  </div>
-</div>
-
+                  <div className="flex items-center">
+                    <Phone className="w-6 h-6 mr-3 text-accent" />
+                    <a
+                      href="tel:+77006512373"
+                      className="block text-lg font-medium hover:opacity-80"
+                      onClick={(e) => e.stopPropagation()}
+                    >
+                      +7 (700) 651-23-73
+                    </a>
+                  </div>
+                  <div className="flex items-center">
+                    <a
+                      href="https://wa.me/77006512373"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={(e) => e.stopPropagation()}
+                      className="flex items-center space-x-2 text-lg hover:opacity-80"
+                    >
+                      <IoLogoWhatsapp className="w-6 h-6 text-primary-600 flex-shrink-0" />
+                      <span>WhatsApp</span>
+                    </a>
+                  </div>
+                </div>
               </div>
             </div>
-
-            
           </div>
         </div>
       </div>

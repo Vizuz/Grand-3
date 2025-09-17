@@ -1,43 +1,43 @@
-import React from 'react';
-import { Award, Shield, Users, TrendingUp } from 'lucide-react';
-import CountUp from 'react-countup';
-import { useInView } from 'react-intersection-observer';
+import React from "react";
+import { Award, Shield, Users, TrendingUp } from "lucide-react";
+import CountUp from "react-countup";
+import { useInView } from "react-intersection-observer";
 
 export default function AboutSection() {
   // Блок преимуществ
   const advantages = [
     {
       icon: <Award className="w-8 h-8" />,
-      title: 'Высокое качество',
+      title: "Высокое качество",
       description:
-        'Используем только проверенные материалы и современные технологии строительства',
+        "Используем только проверенные материалы и современные технологии строительства",
     },
     {
       icon: <Shield className="w-8 h-8" />,
-      title: 'Надёжность',
+      title: "Надёжность",
       description:
-        'Более 5 лет на рынке недвижимости. Все проекты сдаются точно в срок',
+        "Более 5 лет на рынке недвижимости. Все проекты сдаются точно в срок",
     },
     {
       icon: <Users className="w-8 h-8" />,
-      title: 'Клиентский сервис',
+      title: "Клиентский сервис",
       description:
-        'Персональный менеджер для каждого клиента и поддержка на всех этапах',
+        "Персональный менеджер для каждого клиента и поддержка на всех этапах",
     },
     {
       icon: <TrendingUp className="w-8 h-8" />,
-      title: 'Рост стоимости',
+      title: "Рост стоимости",
       description:
-        'Наши объекты показывают стабильный рост цены благодаря удачному расположению',
+        "Наши объекты показывают стабильный рост цены благодаря удачному расположению",
     },
   ];
 
   // Подготовка статистики с анимацией счёта
   const stats = [
-    { end: 5, suffix: '+', label: 'лет опыта' },
-    { end: 740, suffix: '+', label: 'довольных семей' },
-    { end: 5, suffix: '', label: 'жилых комплексов' },
-    { end: 100, suffix: '%', label: 'сданы в срок' },
+    { end: 5, suffix: "+", label: "лет опыта" },
+    { end: 740, suffix: "+", label: "довольных семей" },
+    { end: 5, suffix: "", label: "жилых комплексов" },
+    { end: 100, suffix: "%", label: "сданы в срок" },
   ];
 
   // Хук intersection observer
@@ -55,7 +55,8 @@ export default function AboutSection() {
             Почему выбирают GRAND
           </h2>
           <p className="text-xl text-neutral-dark/70 max-w-3xl mx-auto">
-            Мы создаём не просто дома — мы создаём пространства для счастливой жизни
+            Мы создаём не просто дома — мы создаём пространства для счастливой
+            жизни
           </p>
         </div>
 

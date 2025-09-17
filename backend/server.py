@@ -79,21 +79,20 @@ class Application(BaseModel):
 
 class Apartment(BaseModel):
     id: str = Field(default_factory=lambda: str(uuid.uuid4()))
-    number: int
+    number: Optional[int] = None  
     project: str
     area: float
     floor: int
     totalFloors: int
     price: int
     images: Optional[List[str]] = []
-    description: str = ""
+    description: Optional[str] = None 
     features: Optional[List[str]] = []
     rooms: int
     available: bool = True
 
     class Config:
         extra = "ignore"
-
 
 # ─── ROUTES: StatusCheck ─────────────────────────────────────────────────────────
 

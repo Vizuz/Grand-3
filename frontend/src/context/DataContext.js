@@ -4,16 +4,16 @@ import React, {
   useEffect,
   useCallback,
   useContext,
-  useMemo
-} from 'react';
-import dataService from '../services/dataService';
+  useMemo,
+} from "react";
+import dataService from "../services/dataService";
 
 export const DataContext = createContext();
 
-const API_URL = window.location.hostname === 'localhost'
-  ? 'http://localhost:8000/api'
-  : 'https://grand-3.onrender.com/api';
-
+const API_URL =
+  window.location.hostname === "localhost"
+    ? "http://localhost:8000/api"
+    : "https://grand-3.onrender.com/api";
 
 // Удобный хук вместо прямого useContext(DataContext)
 export const useData = () => useContext(DataContext);
@@ -27,11 +27,11 @@ export const DataProvider = ({ children }) => {
   const fetchApplications = useCallback(async () => {
     try {
       const res = await fetch(`${API_URL}/applications`);
-      if (!res.ok) throw new Error('Network response was not ok');
+      if (!res.ok) throw new Error("Network response was not ok");
       const data = await res.json();
       setApplications(data);
     } catch (err) {
-      console.error('Failed to fetch applications:', err);
+      console.error("Failed to fetch applications:", err);
     }
   }, []);
 
@@ -46,18 +46,16 @@ export const DataProvider = ({ children }) => {
   const updateApplicationStatus = async (id, status) => {
     try {
       const res = await fetch(`${API_URL}/applications/${id}`, {
-        method: 'PATCH',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ status })
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ status }),
       });
-      if (!res.ok) throw new Error('Network response was not ok');
+      if (!res.ok) throw new Error("Network response was not ok");
       const data = await res.json();
-      setApplications((prev) =>
-        prev.map((a) => (a.id === id ? data : a))
-      );
+      setApplications((prev) => prev.map((a) => (a.id === id ? data : a)));
       return data;
     } catch (err) {
-      console.error('Failed to update application:', err);
+      console.error("Failed to update application:", err);
       throw err;
     }
   };
@@ -65,12 +63,12 @@ export const DataProvider = ({ children }) => {
   const deleteApplication = async (id) => {
     try {
       const res = await fetch(`${API_URL}/applications/${id}`, {
-        method: 'DELETE'
+        method: "DELETE",
       });
-      if (!res.ok) throw new Error('Network response was not ok');
+      if (!res.ok) throw new Error("Network response was not ok");
       setApplications((prev) => prev.filter((a) => a.id !== id));
     } catch (err) {
-      console.error('Failed to delete application:', err);
+      console.error("Failed to delete application:", err);
       throw err;
     }
   };
@@ -79,11 +77,11 @@ export const DataProvider = ({ children }) => {
   const fetchApartments = useCallback(async () => {
     try {
       const res = await fetch(`${API_URL}/apartments`);
-      if (!res.ok) throw new Error('Network response was not ok');
+      if (!res.ok) throw new Error("Network response was not ok");
       const data = await res.json();
       setApartments(data);
     } catch (err) {
-      console.error('Failed to fetch apartments:', err);
+      console.error("Failed to fetch apartments:", err);
     }
   }, []);
 
@@ -94,16 +92,16 @@ export const DataProvider = ({ children }) => {
   const addApartment = async (apartment) => {
     try {
       const res = await fetch(`${API_URL}/apartments`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(apartment)
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(apartment),
       });
-      if (!res.ok) throw new Error('Network response was not ok');
+      if (!res.ok) throw new Error("Network response was not ok");
       const data = await res.json();
       setApartments((prev) => [data, ...prev]);
       return data;
     } catch (err) {
-      console.error('Failed to add apartment:', err);
+      console.error("Failed to add apartment:", err);
       throw err;
     }
   };
@@ -111,18 +109,16 @@ export const DataProvider = ({ children }) => {
   const updateApartment = async (id, apartment) => {
     try {
       const res = await fetch(`${API_URL}/apartments/${id}`, {
-        method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(apartment)
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(apartment),
       });
-      if (!res.ok) throw new Error('Network response was not ok');
+      if (!res.ok) throw new Error("Network response was not ok");
       const data = await res.json();
-      setApartments((prev) =>
-        prev.map((a) => (a.id === id ? data : a))
-      );
+      setApartments((prev) => prev.map((a) => (a.id === id ? data : a)));
       return data;
     } catch (err) {
-      console.error('Failed to update apartment:', err);
+      console.error("Failed to update apartment:", err);
       throw err;
     }
   };
@@ -130,12 +126,12 @@ export const DataProvider = ({ children }) => {
   const deleteApartment = async (id) => {
     try {
       const res = await fetch(`${API_URL}/apartments/${id}`, {
-        method: 'DELETE'
+        method: "DELETE",
       });
-      if (!res.ok) throw new Error('Network response was not ok');
+      if (!res.ok) throw new Error("Network response was not ok");
       setApartments((prev) => prev.filter((a) => a.id !== id));
     } catch (err) {
-      console.error('Failed to delete apartment:', err);
+      console.error("Failed to delete apartment:", err);
       throw err;
     }
   };
@@ -146,7 +142,7 @@ export const DataProvider = ({ children }) => {
     const proto = Object.getPrototypeOf(dataService);
     const methods = {};
     Object.getOwnPropertyNames(proto).forEach((k) => {
-      if (k !== 'constructor' && typeof dataService[k] === 'function') {
+      if (k !== "constructor" && typeof dataService[k] === "function") {
         methods[k] = dataService[k].bind(dataService);
       }
     });
@@ -161,7 +157,7 @@ export const DataProvider = ({ children }) => {
     return {
       ...serviceMethods, // trackPageView и др.
       projects,
-      apartments,           // теперь реальные данные из MongoDB
+      apartments, // теперь реальные данные из MongoDB
       applications,
       addApplication,
       updateApplicationStatus,
@@ -170,9 +166,15 @@ export const DataProvider = ({ children }) => {
       refreshApartments: fetchApartments,
       addApartment,
       updateApartment,
-      deleteApartment
+      deleteApartment,
     };
-  }, [applications, apartments, serviceMethods, fetchApplications, fetchApartments]);
+  }, [
+    applications,
+    apartments,
+    serviceMethods,
+    fetchApplications,
+    fetchApartments,
+  ]);
 
   return (
     <DataContext.Provider value={contextValue}>{children}</DataContext.Provider>

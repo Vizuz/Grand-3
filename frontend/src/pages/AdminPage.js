@@ -1,18 +1,21 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import AdminLogin from '../components/admin/AdminLogin';
-import AdminDashboard from '../components/admin/AdminDashboard';
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import AdminLogin from "../components/admin/AdminLogin";
+import AdminDashboard from "../components/admin/AdminDashboard";
 
 export default function AdminPage() {
   const [isAuthenticated, setIsAuthenticated] = useState(
-    localStorage.getItem('adminAuth') === 'true'
+    localStorage.getItem("adminAuth") === "true",
   );
   const navigate = useNavigate();
 
   const handleLogin = (credentials) => {
-    if (credentials.username === 'admin' && credentials.password === 'grand123') {
+    if (
+      credentials.username === "admin" &&
+      credentials.password === "grand123"
+    ) {
       setIsAuthenticated(true);
-      localStorage.setItem('adminAuth', 'true');
+      localStorage.setItem("adminAuth", "true");
       return true;
     }
     return false;
@@ -20,8 +23,8 @@ export default function AdminPage() {
 
   const handleLogout = () => {
     setIsAuthenticated(false);
-    localStorage.removeItem('adminAuth');
-    navigate('/');
+    localStorage.removeItem("adminAuth");
+    navigate("/");
   };
 
   if (!isAuthenticated) {

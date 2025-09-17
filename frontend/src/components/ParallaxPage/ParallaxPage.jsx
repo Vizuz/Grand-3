@@ -1,25 +1,25 @@
-import React, { useEffect, useRef } from 'react';
-import styles from './ParallaxPage.module.css';
+import React, { useEffect, useRef } from "react";
+import styles from "./ParallaxPage.module.css";
 
 // компоненты
-import Hero from './../../components/Hero';
-import Footer from './../../components/Footer';
-import Zov from './../../components/Zov/Zov';
-import ParallaxProject from './../../components/parallax-project/ParallaxProject';
-import ParallaxGallery from './../../components/parallax-gallery/ParallaxGallery';
-import UnusualLayouts from './../../components/UnusualLayouts';
-import ScrollAq from './../../components/ScrollAq/ScrollAq';
-import InfoAq from './../../components/InfoAq/InfoAq';
-import ScrollAdem from './../../components/ScrollAdem/ScrollAdem';
-import InfoAdem from './../../components/InfoAdem/InfoAdem';
-import UnusualLayouts2 from './../../components/UnusualLayouts2';
-import InfrastructureSection from './../../components/InfrastructureSection';
-import ContactHome from './../../components/ContactHome';
-import ShowcaseCarousel from './../../components/ShowcaseCarousel';
+import Hero from "./../../components/Hero";
+import Footer from "./../../components/Footer";
+import Zov from "./../../components/Zov/Zov";
+import ParallaxProject from "./../../components/parallax-project/ParallaxProject";
+import ParallaxGallery from "./../../components/parallax-gallery/ParallaxGallery";
+import UnusualLayouts from "./../../components/UnusualLayouts";
+import ScrollAq from "./../../components/ScrollAq/ScrollAq";
+import InfoAq from "./../../components/InfoAq/InfoAq";
+import ScrollAdem from "./../../components/ScrollAdem/ScrollAdem";
+import InfoAdem from "./../../components/InfoAdem/InfoAdem";
+import UnusualLayouts2 from "./../../components/UnusualLayouts2";
+import InfrastructureSection from "./../../components/InfrastructureSection";
+import ContactHome from "./../../components/ContactHome";
+import ShowcaseCarousel from "./../../components/ShowcaseCarousel";
 
 // gsap
-import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 // ВАЖНО: вызов после всех import'ов
 gsap.registerPlugin(ScrollTrigger);
@@ -33,13 +33,20 @@ export default function ParallaxPage() {
   const measureRaf = useRef(0);
   const scrollRaf = useRef(0);
 
-  const pictures = ['/img/nota-2.png', '/img/house.png', '/img/nota-3.png'];
+  const pictures = ["/img/nota-2.png", "/img/house.png", "/img/nota-3.png"];
 
   useEffect(() => {
-    const outer = document.getElementById('scroll-animate');
+    const outer = document.getElementById("scroll-animate");
 
     const measure = () => {
-      if (!outer || !mainRef.current || !headerRef.current || !footerRef.current || !contentRef.current) return;
+      if (
+        !outer ||
+        !mainRef.current ||
+        !headerRef.current ||
+        !footerRef.current ||
+        !contentRef.current
+      )
+        return;
 
       const winH = window.innerHeight;
       const footerH = footerRef.current.offsetHeight || 0;
@@ -84,7 +91,7 @@ export default function ParallaxPage() {
     };
 
     // интеграция с ScrollTrigger — scrollerProxy + defaults
-    const scrollerEl = document.getElementById('scroll-animate-main');
+    const scrollerEl = document.getElementById("scroll-animate-main");
     if (scrollerEl) {
       ScrollTrigger.scrollerProxy(scrollerEl, {
         scrollTop(value) {
@@ -92,9 +99,14 @@ export default function ParallaxPage() {
           return window.pageYOffset || document.documentElement.scrollTop || 0;
         },
         getBoundingClientRect() {
-          return { top: 0, left: 0, width: window.innerWidth, height: window.innerHeight };
+          return {
+            top: 0,
+            left: 0,
+            width: window.innerWidth,
+            height: window.innerHeight,
+          };
         },
-        pinType: 'transform',
+        pinType: "transform",
       });
       ScrollTrigger.defaults({ scroller: scrollerEl });
     }
@@ -103,32 +115,36 @@ export default function ParallaxPage() {
     onResize();
 
     // слушатели
-    window.addEventListener('resize', onResize, { passive: true });
-    window.addEventListener('load', onResize, { passive: true });
-    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener("resize", onResize, { passive: true });
+    window.addEventListener("load", onResize, { passive: true });
+    window.addEventListener("scroll", onScroll, { passive: true });
 
     // пересчёт при изменении контента
     const ro = new ResizeObserver(() => onResize());
     if (contentRef.current) ro.observe(contentRef.current);
 
-    ScrollTrigger.addEventListener('refreshInit', onResize);
+    ScrollTrigger.addEventListener("refreshInit", onResize);
     ScrollTrigger.refresh();
 
     return () => {
-      window.removeEventListener('resize', onResize);
-      window.removeEventListener('load', onResize);
-      window.removeEventListener('scroll', onScroll);
+      window.removeEventListener("resize", onResize);
+      window.removeEventListener("load", onResize);
+      window.removeEventListener("scroll", onScroll);
       ro.disconnect();
       cancelAnimationFrame(measureRaf.current);
       cancelAnimationFrame(scrollRaf.current);
-      ScrollTrigger.removeEventListener('refreshInit', onResize);
+      ScrollTrigger.removeEventListener("refreshInit", onResize);
     };
   }, []);
 
   return (
     <div id="scroll-animate" className={styles.scrollAnimate}>
       {/* фиксированная сцена, которую двигаем transform'ом */}
-      <div id="scroll-animate-main" className={styles.scrollAnimateMain} ref={mainRef}>
+      <div
+        id="scroll-animate-main"
+        className={styles.scrollAnimateMain}
+        ref={mainRef}
+      >
         <div className={styles.wrapperParallax} ref={wrapperRef}>
           {/* header абсолютный внутри сцены */}
           <header ref={headerRef} className={styles.header}>

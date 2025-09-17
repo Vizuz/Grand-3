@@ -1,10 +1,10 @@
 /* src/components/Zov/Zov.jsx */
-import React, { useEffect, useRef } from 'react';
-import styles from './Zov.module.css';
+import React, { useEffect, useRef } from "react";
+import styles from "./Zov.module.css";
 
-import Splitting from 'splitting';                 //  npm i splitting
-import 'splitting/dist/splitting.css';
-import { gsap } from 'gsap';                       //  npm i gsap
+import Splitting from "splitting"; //  npm i splitting
+import "splitting/dist/splitting.css";
+import { gsap } from "gsap"; //  npm i gsap
 
 export default function Zov() {
   const rootRef = useRef(null);
@@ -12,8 +12,8 @@ export default function Zov() {
   useEffect(() => {
     /* --- 1. Разбиваем заголовок на <span> по строкам --- */
     const results = Splitting({
-      target: rootRef.current?.querySelector('[data-splitting]'),
-      by: 'lines'
+      target: rootRef.current?.querySelector("[data-splitting]"),
+      by: "lines",
     });
 
     if (results && results.length) {
@@ -31,20 +31,20 @@ export default function Zov() {
         let i = 0;
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
-            tl.set(entry.target, { visibility: 'visible' }).from(entry.target, {
+            const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
+            tl.set(entry.target, { visibility: "visible" }).from(entry.target, {
               duration: 1.5,
               y: 200,
               skewY: 40,
               autoAlpha: 0,
-              delay: i * 0.1
+              delay: i * 0.1,
             });
             i += 1;
             self.unobserve(entry.target);
           }
         });
       },
-      { threshold: 0.2 }
+      { threshold: 0.2 },
     );
 
     /* следим за всеми элементами с классом fade */
@@ -60,7 +60,9 @@ export default function Zov() {
       <div className={styles.gridContainer}>
         {/* текст */}
         <div className={styles.item1}>
-          <h1 className='font-bold' data-splitting="lines">Ваш надёжный застройщик в Кокшетау</h1>
+          <h1 className="font-bold" data-splitting="lines">
+            Ваш надёжный застройщик в Кокшетау
+          </h1>
         </div>
 
         {/* картинка */}
