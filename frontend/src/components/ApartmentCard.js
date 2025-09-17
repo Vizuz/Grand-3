@@ -193,12 +193,22 @@ export default function ApartmentCard({ apartment, viewMode = "grid" }) {
           </div>
 
           <Link
-            to={`/apartments/${apartment.id}`}
-            onClick={(e) => e.stopPropagation()}
-            className="block w-full bg-accent hover:bg-accent-600 text-black text-center px-4 py-2 rounded-lg transition-colors"
-          >
-            Подробнее
-          </Link>
+  to={`/apartments/${apartment.id}`}
+  onClick={(e) => e.stopPropagation()}
+  className="inline-flex items-center justify-center w-full bg-black text-white font-medium px-4 py-2 rounded-lg transition-transform duration-200 hover:scale-105 hover:bg-gray-900"
+>
+  Подробнее
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    fill="none"
+    viewBox="0 0 24 24"
+    strokeWidth={2}
+    stroke="currentColor"
+    className="ml-2 w-4 h-4"
+  >
+    <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+  </svg>
+</Link>
         </div>
       </div>
     </div>
