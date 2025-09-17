@@ -22,9 +22,12 @@ export const DataProvider = ({ children }) => {
   /* ---- Заявки из Mongo ---- */
   const [applications, setApplications] = useState([]);
   const [apartments, setApartments] = useState([]);
+  const [loadingApplications, setLoadingApplications] = useState(false);
+  const [loadingApartments, setLoadingApartments] = useState(false);
 
   // ======= Applications CRUD =======
   const fetchApplications = useCallback(async () => {
+    setLoadingApplications(true);
     try {
       const res = await fetch(`${API_URL}/applications`);
       if (!res.ok) throw new Error("Network response was not ok");
@@ -32,6 +35,8 @@ export const DataProvider = ({ children }) => {
       setApplications(data);
     } catch (err) {
       console.error("Failed to fetch applications:", err);
+    } finally {
+      setLoadingApplications(false);
     }
   }, []);
 
@@ -75,6 +80,7 @@ export const DataProvider = ({ children }) => {
 
   // ======= Apartments CRUD =======
   const fetchApartments = useCallback(async () => {
+    setLoadingApartments(true);
     try {
       const res = await fetch(`${API_URL}/apartments`);
       if (!res.ok) throw new Error("Network response was not ok");
@@ -82,6 +88,8 @@ export const DataProvider = ({ children }) => {
       setApartments(data);
     } catch (err) {
       console.error("Failed to fetch apartments:", err);
+    } finally {
+      setLoadingApartments(false);
     }
   }, []);
 
@@ -175,6 +183,8 @@ export const DataProvider = ({ children }) => {
       addApartment,
       updateApartment,
       deleteApartment,
+      loadingApplications,
+      loadingApartments,
     };
   }, [
     applications,
@@ -182,6 +192,8 @@ export const DataProvider = ({ children }) => {
     serviceMethods,
     fetchApplications,
     fetchApartments,
+    loadingApplications,
+    loadingApartments,
   ]);
 
   return (

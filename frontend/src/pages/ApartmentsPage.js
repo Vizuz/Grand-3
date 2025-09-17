@@ -28,7 +28,9 @@ export default function ApartmentsPage() {
   }, [trackPageView]);
 
   useEffect(() => {
-    if (apartments) setLoading(false);
+    if (apartments.length > 0) {
+      setLoading(false);
+    }
   }, [apartments]);
 
   const filteredApartments = useMemo(() => {
