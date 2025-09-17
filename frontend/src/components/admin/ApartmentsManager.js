@@ -132,7 +132,7 @@ export default function ApartmentsManager() {
       area: parseFloat(formData.area),
       floor: parseInt(formData.floor),
       totalFloors: parseInt(formData.totalFloors),
-      price: parseInt(formData.price),
+      price: formData.price ? parseInt(formData.price) : null,
       images: Array.isArray(formData.images)
         ? formData.images
         : formData.images
@@ -347,7 +347,7 @@ export default function ApartmentsManager() {
                     });
                   }}
                   className="w-full border border-gray-300 rounded-lg px-3 py-2"
-                  required
+                  
                   inputMode="numeric"
                   pattern="[0-9\s]*"
                   autoComplete="off"

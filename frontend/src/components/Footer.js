@@ -10,7 +10,7 @@ export default function Footer() {
           {/* Company Info */}
           <div className="md:col-span-3">
             <h3 className="text-3xl font-bold font-serif text-accent mb-4">
-              GRAND
+              Grand Komfort Stroy
             </h3>
             <p className="text-lg text-white/80 mb-6 max-w-md">
               Строительная компания комфорт-класса. Создаём качественную

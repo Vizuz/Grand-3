@@ -214,14 +214,16 @@ export default function ApartmentDetailPage() {
           <div className="lg:col-span-1">
             {/* Price Card */}
             <div className="bg-white shadow-lg p-8 mb-8">
-              <div className="text-center mb-6">
-                <div className="text-4xl font-bold text-primary-900 mb-2">
-                  {formatPrice(apartment.price)}
+              {apartment.price && (
+                <div className="text-center mb-6">
+                  <div className="text-4xl font-bold text-primary-900 mb-2">
+                    {formatPrice(apartment.price)}
+                  </div>
+                  <div className="text-md">
+                    {formatPricePerSqm(pricePerSqmValue)} ₸/м²
+                  </div>
                 </div>
-                <div className="text-md">
-                  {formatPricePerSqm(pricePerSqmValue)} ₸/м²
-                </div>
-              </div>
+              )}
 
               <div className="space-y-4 mb-8">
                 <Link

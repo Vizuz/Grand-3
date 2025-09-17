@@ -58,7 +58,7 @@ export default function ApartmentCard({ apartment, viewMode = "grid" }) {
                   <p className="text-accent">{apartment.projectName}</p>
                 </div>
                 <div className="text-2xl font-bold text-primary-900">
-                  {formatPrice(apartment.price)}
+                  {apartment.price ? formatPrice(apartment.price) : "Старт продаж"}
                 </div>
               </div>
 
@@ -174,7 +174,7 @@ export default function ApartmentCard({ apartment, viewMode = "grid" }) {
 
           <div className="mb-4">
             <div className="text-2xl font-bold text-primary-900">
-              {formatPrice(apartment.price)}
+              {apartment.price ? formatPrice(apartment.price) : "Старт продаж"}
             </div>
           </div>
         </div>
