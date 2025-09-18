@@ -90,7 +90,7 @@ export default function ApartmentDetailPage() {
 
           <div className="text-white">
             <h1 className="text-3xl lg:text-5xl font-bold font-serif mb-4">
-              Квартира №{apartment.number}
+              Квартира
             </h1>
             <p className="text-xl text-accent mb-2">{apartment.projectName}</p>
             <p className="text-lg opacity-80">{apartment.description}</p>
