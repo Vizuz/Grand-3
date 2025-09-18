@@ -56,7 +56,7 @@ export default function ApartmentsManager() {
     area: "",
     floor: "",
     totalFloors: "",
-    price: "",
+    price: "", // оставить как пустая строка
     layoutImage: "",
     images: "",
     features: [],
@@ -134,12 +134,23 @@ export default function ApartmentsManager() {
   // --- submit ---
   const handleSubmit = async (e) => {
     e.preventDefault();
+    // Если цена не указана, рассчитываем автоматически
+    let calculatedPrice = formData.price;
+    if (!calculatedPrice) {
+      // area * 330000
+      const areaNum = parseFloat(formData.area);
+      if (!isNaN(areaNum) && areaNum > 0) {
+        calculatedPrice = (areaNum * 330000).toFixed(0);
+      } else {
+        calculatedPrice = "";
+      }
+    }
     const apartmentPayload = {
       project: formData.projectName,
       area: parseFloat(formData.area),
       floor: parseInt(formData.floor),
       totalFloors: parseInt(formData.totalFloors),
-      price: formData.price ? parseInt(formData.price) : null,
+      price: calculatedPrice ? parseInt(calculatedPrice) : null,
       images: Array.isArray(formData.images)
         ? formData.images
         : formData.images
@@ -340,11 +351,15 @@ export default function ApartmentsManager() {
                 <input
                   type="text"
                   value={
-                    formData.price
+                    formData.price !== ""
                       ? formData.price
                           .replace(/\D/g, "")
                           .replace(/\B(?=(\d{3})+(?!\d))/g, " ")
-                      : ""
+                      : (
+                          formData.area && !isNaN(parseFloat(formData.area))
+                            ? String(Math.round(parseFloat(formData.area) * 330000)).replace(/\B(?=(\d{3})+(?!\d))/g, " ")
+                            : ""
+                        )
                   }
                   onChange={(e) => {
                     const raw = e.target.value.replace(/\D/g, "");
@@ -354,7 +369,6 @@ export default function ApartmentsManager() {
                     });
                   }}
                   className="w-full border border-gray-300 rounded-lg px-3 py-2"
-                  
                   inputMode="numeric"
                   pattern="[0-9\s]*"
                   autoComplete="off"
