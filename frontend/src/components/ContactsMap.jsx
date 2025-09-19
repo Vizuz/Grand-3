@@ -5,7 +5,7 @@ export default function ContactsMap() {
   useEffect(() => {
     // 1) подключаем 2GIS
     const s = document.createElement("script");
-    s.src = "https://maps.api.2gis.ru/2.0/loader.js?pkg=full";
+    s.src = "https://maps.api.2gis.ru/2.0/loader.js?key=c31d5dcc-faa6-48ee-8417-0fa1ce6f5cbf";
     s.async = true;
     document.body.appendChild(s);
 

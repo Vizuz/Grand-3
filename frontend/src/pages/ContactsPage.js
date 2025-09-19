@@ -219,22 +219,22 @@ export default function ContactsPage() {
           </div>
         </div>
 
-        <div className="flex flex-col md:flex-row h-screen pb-20">
+        {/* <div className="flex flex-col md:flex-row h-screen pb-20"> */}
           {/* Левая часть: на мобильных full‑width, на десктопе — 1/2 */}
-          <div className="w-full md:w-1/2 h-1/2 md:h-full overflow-hidden">
+          {/* <div className="w-full md:w-1/2 h-1/2 md:h-full overflow-hidden">
             <img
               src={image}
               alt="logo"
               className="w-full h-full object-cover select-none"
               draggable={false}
             />
-          </div>
+          </div> */}
 
           {/* Правая часть: карта */}
-          <div className="w-full md:w-1/2 h-1/2 md:h-full">
+          {/* <div className="w-full md:w-1/2 h-1/2 md:h-full">
             <ContactsMap className="w-full h-full" />
-          </div>
-        </div>
+          </div> */}
+        {/* </div> */}
       </main>
 
       <Footer />
