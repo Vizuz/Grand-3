@@ -48,6 +48,8 @@ export default function HomePage() {
       <ParallaxProject />
       <ParallaxGallery />
       <InfrastructureSection />
+      <ScrollAdem />
+      <InfoAdem />
       {/* <ShowcaseCarousel images={pictures} /> */}
 
       {/* <UnusualLayouts 
@@ -62,8 +64,8 @@ export default function HomePage() {
         headerText={`Новый жилой комплекс «Акбидай 4» находится в процессе строительства. 
 Следить за ходом работ можно на этой странице и в Instagram, где мы публикуем фотографии и сторис со стройплощадки.`}
       />
-      <ScrollAdem />
-      <InfoAdem />
+      
+      
       
       <GrandFeature />
       
