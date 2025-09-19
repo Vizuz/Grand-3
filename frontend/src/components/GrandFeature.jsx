@@ -4,7 +4,8 @@ export default function SoulFeature() {
   const images = [
     "https://storage.yandexcloud.net/vizuz/book.webp",
     "https://storage.yandexcloud.net/vizuz/music.webp",
-    "https://storage.yandexcloud.net/vizuz/dog.webp",
+    "https://storage.yandexcloud.net/vizuz/3.webp",
+   
   ];
 
   return (

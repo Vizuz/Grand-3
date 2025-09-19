@@ -47,6 +47,7 @@ export default function HomePage() {
       <Zov />
       <ParallaxProject />
       <ParallaxGallery />
+      <InfrastructureSection />
       {/* <ShowcaseCarousel images={pictures} /> */}
 
       {/* <UnusualLayouts 
@@ -56,15 +57,16 @@ export default function HomePage() {
             /> */}
       <ScrollAq />
       <InfoAq />
-      <ScrollAdem />
-      <InfoAdem />
-      <InfrastructureSection />
-      <GrandFeature />
       <UnusualLayouts2
         headerTitle="Следите за строительством ЖК AQBIDAI IV"
         headerText={`Новый жилой комплекс «Акбидай 4» находится в процессе строительства. 
 Следить за ходом работ можно на этой странице и в Instagram, где мы публикуем фотографии и сторис со стройплощадки.`}
       />
+      <ScrollAdem />
+      <InfoAdem />
+      
+      <GrandFeature />
+      
 
       <ContactHome />
       <Footer />

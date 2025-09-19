@@ -51,6 +51,7 @@ export default function InfrastructureSection() {
       style={{
         backgroundImage:
           "url('https://storage.yandexcloud.net/vizuz/bg-inf.webp')",
+          // "url('./img/5d.png')",
       }}
     >
       {/* заголовок */}

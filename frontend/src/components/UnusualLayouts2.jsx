@@ -98,7 +98,7 @@ export default function UnusualLayouts({ headerTitle, headerText }) {
   const miniOffset = `${index * 100}%`;
 
   return (
-    <section className="relative bg-grey w-full overflow-hidden">
+    <section className="relative bg-grey w-full overflow-hidden mb-20 lg:mb-40">
       <div className="flex flex-col lg:flex-row justify-between items-start py-[50px] lg:py-[150px]">
         {/* Левый заголовок */}
         <h2 className="pl-8 text-3xl lg:text-5xl font-bold mb-8">

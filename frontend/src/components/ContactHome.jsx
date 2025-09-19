@@ -88,9 +88,10 @@ export default function ContactHome() {
   };
   return (
     <section
-      className="relative bg-cover bg-center h-[560px] lg:h-[920px] my-[600px]"
+      className="relative bg-cover bg-center h-[560px] lg:h-[920px] my-[300px]"
       style={{
-        backgroundImage: `url('https://storage.yandexcloud.net/vizuz/women-dog.webp')`,
+        backgroundImage: `url('https://storage.yandexcloud.net/vizuz/1.webp')`,
+        
       }}
     >
       {/* затемнение фона */}
@@ -99,8 +100,7 @@ export default function ContactHome() {
       <div className="relative container mx-auto px-6 py-16 lg:py-32 text-white">
         {/* Заголовок */}
         <h2 className="break-words mx-auto text-3xl lg:text-6xl font-bold leading-snug lg:leading-relaxed lg:tracking-wider text-center pb-20 lg:max-w-5xl">
-          «Подходящего времени» нет. Есть просто время. И вы решаете, что с ним
-          делать.
+          Время для перемен — время для новой квартиры.
         </h2>
       </div>
 
