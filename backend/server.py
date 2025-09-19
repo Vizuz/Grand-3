@@ -12,6 +12,9 @@ from typing import List, Optional
 import uuid
 from datetime import datetime
 import httpx
+import jwt
+import datetime as dt
+
 TELEGRAM_TOKEN = "8430480476:AAHNc5T2gLrFNdazGVK6Vqy6DtDjBJvSI-M"
 CHAT_ID = 1868738810
 ROOT_DIR = Path(__file__).parent
@@ -23,6 +26,9 @@ YANDEX_SECRET_KEY = os.getenv("YANDEX_SECRET_KEY")
 BUCKET_NAME = os.getenv("BUCKET_NAME", "vizuz")
 ENDPOINT_URL = "https://storage.yandexcloud.net"
 
+ADMIN_USERNAME = os.getenv("ADMIN_USERNAME")
+ADMIN_PASSWORD = os.getenv("ADMIN_PASSWORD")
+SECRET_KEY = os.getenv("SECRET_KEY", "secret")
 s3 = boto3.client(
     "s3",
     endpoint_url=ENDPOINT_URL,
@@ -50,6 +56,10 @@ app.add_middleware(
 api = APIRouter(prefix="/api")
 
 # ─── MODELS ─────────────────────────────────────────────────────────────────────
+
+class LoginRequest(BaseModel):
+    username: str
+    password: str
 
 class StatusCheck(BaseModel):
     id: str = Field(default_factory=lambda: str(uuid.uuid4()))
@@ -203,6 +213,17 @@ async def delete_apartment(apt_id: str):
         raise HTTPException(404, "Apartment not found")
     return {"ok": True}
 
+# --- ROUTE: Admin Login ─────────────────────────────────────────────────────────────
+@api.post("/login")
+def login(request: LoginRequest):
+    if request.username == ADMIN_USERNAME and request.password == ADMIN_PASSWORD:
+        token = jwt.encode(
+            {"sub": request.username, "exp": dt.datetime.utcnow() + dt.timedelta(hours=1)},
+            SECRET_KEY,
+            algorithm="HS256"
+        )
+        return {"token": token}
+    raise HTTPException(status_code=401, detail="Invalid credentials")
 
 # ─── FINAL SETUP ────────────────────────────────────────────────────────────────
 

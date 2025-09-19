@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Home,
   Building2,
@@ -22,6 +22,19 @@ import AnalyticsPanel from "./AnalyticsPanel";
 export default function AdminDashboard({ onLogout }) {
   const { projects, apartments, applications, getAdminStats } = useData();
   const [activeTab, setActiveTab] = useState("overview");
+  const [username, setUsername] = useState("Админ");
+
+  useEffect(() => {
+    const token = localStorage.getItem("authToken");
+    if (!token) {
+      onLogout();
+    } else {
+      const storedUsername = localStorage.getItem("username");
+      if (storedUsername) {
+        setUsername(storedUsername);
+      }
+    }
+  }, [onLogout]);
 
   const stats = getAdminStats();
 
@@ -239,13 +252,16 @@ export default function AdminDashboard({ onLogout }) {
               </span>
             </div>
 
-            <button
-              onClick={onLogout}
-              className="flex items-center text-gray-600 hover:text-red-600 transition-colors"
-            >
-              <LogOut className="w-5 h-5 mr-2" />
-              Выйти
-            </button>
+            <div className="flex items-center space-x-4">
+              <span className="text-primary-900 font-medium">{username}</span>
+              <button
+                onClick={onLogout}
+                className="flex items-center text-gray-600 hover:text-red-600 transition-colors"
+              >
+                <LogOut className="w-5 h-5 mr-2" />
+                Выйти
+              </button>
+            </div>
           </div>
         </div>
       </header>

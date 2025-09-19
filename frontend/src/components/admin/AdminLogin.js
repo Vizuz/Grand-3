@@ -13,13 +13,19 @@ export default function AdminLogin({ onLogin }) {
     e.preventDefault();
     setLoading(true);
     setError("");
-
-    const success = onLogin(credentials);
-
-    if (!success) {
+    try {
+      const res = await fetch(`${process.env.REACT_APP_BACKEND_URL}/login`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(credentials),
+      });
+      if (!res.ok) throw new Error("Ошибка входа");
+      const data = await res.json();
+      localStorage.setItem("token", data.token);
+      onLogin();
+    } catch (err) {
       setError("Неверные данные для входа");
     }
-
     setLoading(false);
   };
 
@@ -40,7 +46,7 @@ export default function AdminLogin({ onLogin }) {
               <Shield className="w-8 h-8 text-accent" />
             </div>
             <h1 className="text-2xl font-bold text-primary-900 mb-2">
-              Админ-панель GRAND
+              Админ-панель Grand Komfort Stroy
             </h1>
             <p className="text-gray-600">Войдите для управления сайтом</p>
           </div>
@@ -98,15 +104,6 @@ export default function AdminLogin({ onLogin }) {
             </button>
           </form>
 
-          <div className="mt-6 text-center">
-            <div className="text-sm text-gray-500 bg-blue-50 p-4 rounded-lg">
-              <strong>Тестовые данные:</strong>
-              <br />
-              Логин: admin
-              <br />
-              Пароль: grand123
-            </div>
-          </div>
         </div>
       </div>
     </div>
