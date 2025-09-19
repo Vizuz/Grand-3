@@ -72,7 +72,7 @@ export default function ScrollAq() {
 
             <div className="max-w-3xl text-sm sm:text-base md:text-lg lg:text-xl leading-snug">
               Пятиэтажный AQBIDAI&nbsp;IV предлагает 110 современных квартир,
-              закрытую территорию с&nbsp;ландшафтным озеленением и&nbsp;удобный
+              закрытую территорию с&nbsp;озеленением и&nbsp;удобный
               доступ ко&nbsp;всем городским сервисам.
             </div>
           </h2>
