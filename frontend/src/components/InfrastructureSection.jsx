@@ -50,8 +50,8 @@ export default function InfrastructureSection() {
       className="relative bg-cover bg-center py-32"
       style={{
         backgroundImage:
-          "url('https://storage.yandexcloud.net/vizuz/bg-inf.webp')",
-          // "url('./img/5d.png')",
+          "url('https://storage.yandexcloud.net/vizuz/a9q.webp')",
+          // "url('./img/a9.png')",
       }}
     >
       {/* заголовок */}
