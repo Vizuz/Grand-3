@@ -21,8 +21,7 @@ export default function AdminLogin({ onLogin }) {
       });
       if (!res.ok) throw new Error("Ошибка входа");
       const data = await res.json();
-      localStorage.setItem("token", data.token);
-      onLogin();
+      onLogin(data.token); // передаём токен наверх
     } catch (err) {
       setError("Неверные данные для входа");
     }

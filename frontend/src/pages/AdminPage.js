@@ -9,30 +9,13 @@ export default function AdminPage() {
   );
   const navigate = useNavigate();
 
-  const handleLogin = async (credentials) => {
-    try {
-      const response = await fetch("/api/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(credentials),
-      });
-
-      if (!response.ok) {
-        return false;
-      }
-
-      const data = await response.json();
-      if (data.token) {
-        localStorage.setItem("token", data.token);
-        setIsAuthenticated(true);
-        return true;
-      }
-      return false;
-    } catch (error) {
-      return false;
+  const handleLogin = (token) => {
+    if (token) {
+      localStorage.setItem("token", token);
+      setIsAuthenticated(true);
+      return true;
     }
+    return false;
   };
 
   const handleLogout = () => {
