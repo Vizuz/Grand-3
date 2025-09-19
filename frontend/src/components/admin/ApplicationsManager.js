@@ -116,8 +116,8 @@ export default function ApplicationsManager() {
       </div>
 
       {/* table */}
-      <div className="bg-white shadow rounded-lg overflow-x-auto">
-        <table className="min-w-full">
+      <div className="bg-white shadow rounded-lg overflow-x-auto w-full">
+        <table className="min-w-full table-auto">
           <thead className="bg-gray-50">
             <tr>
               <Th>Клиент</Th>
