@@ -48,7 +48,7 @@ export default function ProjectsCarousel() {
     },
     {
       name: "ЖК Акбидай 4",
-      address: "ул Кенжетаева 18",
+      address: "ул Кенжетаева 24",
       completion: "2026 (в процессе строительства)",
       totalApartments: 115,
       floors: 5,
