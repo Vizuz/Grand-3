@@ -529,8 +529,8 @@ export default function ApartmentsManager() {
 
       {/* Список квартир */}
       <div className="bg-white rounded-lg shadow-lg overflow-hidden">
-        <div className="overflow-x-auto w-full">
-          <table className="min-w-full table-auto">
+        <div className="w-full overflow-x-auto">
+          <table className="w-full table-auto">
             <thead className="bg-gray-50">
               <tr>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
