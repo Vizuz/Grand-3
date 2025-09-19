@@ -97,7 +97,7 @@ export default function AdminLogin({ onLogin }) {
             <button
               type="submit"
               disabled={loading}
-              className="w-full bg-accent hover:bg-accent-600 text-white px-6 py-3 rounded-lg  transition-colors disabled:opacity-50"
+              className="w-full bg-black  text-white  px-6 py-3 rounded-lg  transition-colors disabled:opacity-50"
             >
               {loading ? "Вход..." : "Войти"}
             </button>
