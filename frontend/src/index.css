@@ -33,7 +33,7 @@ body {
 }
 
 .gold-gradient {
-  background: linear-gradient(135deg, #d4af37 0%, #f1d276 50%, #d4af37 100%);
+  background-color: #1a3d76;
 }
 
 .text-gradient {
