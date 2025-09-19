@@ -16,7 +16,7 @@ import jwt
 import datetime as dt
 
 TELEGRAM_TOKEN = "8430480476:AAHNc5T2gLrFNdazGVK6Vqy6DtDjBJvSI-M"
-CHAT_ID = 1868738810
+CHAT_ID = 1868738810,6773362695
 ROOT_DIR = Path(__file__).parent
 load_dotenv(ROOT_DIR / '.env')
 
@@ -125,10 +125,11 @@ async def get_applications():
     docs = await db.applications.find().to_list(1000)
     return [Application(**d) for d in docs]
 
+CHAT_IDS = os.getenv("CHAT_IDS", "").split(",")
+
 @api.post("/applications", response_model=Application)
 async def create_application(application: Application):
     await db.applications.insert_one(application.dict())
-    # Отправка уведомления в Telegram
     message = f"""
 📩 Новая заявка!
 👤 Имя: {application.name}
@@ -136,15 +137,15 @@ async def create_application(application: Application):
 🏢 Проект: {application.projectName}
 📝 Сообщение: {application.message or "-"}
     """.strip()
-    try:
-        async with httpx.AsyncClient() as client_http:
-            resp = await client_http.post(
-                f"https://api.telegram.org/bot{TELEGRAM_TOKEN}/sendMessage",
-                json={"chat_id": CHAT_ID, "text": message}
-            )
-            logging.info(f"Telegram response: {resp.status_code} {resp.text}")
-    except Exception as e:
-        logging.exception("Ошибка отправки в Telegram")
+    for chat_id in CHAT_IDS:
+        try:
+            async with httpx.AsyncClient() as client_http:
+                await client_http.post(
+                    f"https://api.telegram.org/bot{TELEGRAM_TOKEN}/sendMessage",
+                    json={"chat_id": chat_id.strip(), "text": message}
+                )
+        except Exception as e:
+            logging.exception(f"Ошибка отправки в Telegram для {chat_id}")
     return application
 
 
