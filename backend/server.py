@@ -216,6 +216,8 @@ async def delete_apartment(apt_id: str):
 # --- ROUTE: Admin Login ─────────────────────────────────────────────────────────────
 @api.post("/login")
 def login(request: LoginRequest):
+    print("FROM FRONT:", request.username, request.password)
+    print("FROM ENV:", ADMIN_USERNAME, ADMIN_PASSWORD)
     if request.username == ADMIN_USERNAME and request.password == ADMIN_PASSWORD:
         token = jwt.encode(
             {"sub": request.username, "exp": dt.datetime.utcnow() + dt.timedelta(hours=1)},
