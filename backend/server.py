@@ -16,7 +16,6 @@ import jwt
 import datetime as dt
 
 TELEGRAM_TOKEN = "8430480476:AAHNc5T2gLrFNdazGVK6Vqy6DtDjBJvSI-M"
-CHAT_ID = 1868738810,6773362695
 ROOT_DIR = Path(__file__).parent
 load_dotenv(ROOT_DIR / '.env')
 
@@ -137,12 +136,12 @@ async def create_application(application: Application):
 🏢 Проект: {application.projectName}
 📝 Сообщение: {application.message or "-"}
     """.strip()
-    for chat_id in CHAT_IDS:
+    for chat_id in [c.strip() for c in CHAT_IDS if c.strip()]:
         try:
             async with httpx.AsyncClient() as client_http:
                 await client_http.post(
                     f"https://api.telegram.org/bot{TELEGRAM_TOKEN}/sendMessage",
-                    json={"chat_id": chat_id.strip(), "text": message}
+                    json={"chat_id": chat_id, "text": message}
                 )
         except Exception as e:
             logging.exception(f"Ошибка отправки в Telegram для {chat_id}")
