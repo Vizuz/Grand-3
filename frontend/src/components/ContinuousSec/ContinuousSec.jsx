@@ -1,8 +1,8 @@
-import React, { useEffect, useRef } from "react";
-import { gsap } from "gsap";
-import { Observer } from "gsap/Observer";
-import { SplitText } from "gsap/SplitText";
-import cs from "./ContinuousSec.module.css";
+import React, { useEffect, useRef } from 'react';
+import { gsap } from 'gsap';
+import { Observer } from 'gsap/Observer';
+import { SplitText } from 'gsap/SplitText';
+import cs from './ContinuousSec.module.css';
 
 gsap.registerPlugin(Observer, SplitText);
 
@@ -18,12 +18,7 @@ export function ContinuousSec() {
     // Безопасно сплитим только те слайды, где есть заголовок
     const splitHeadings = sections.map((sec) => {
       const h = sec.querySelector(`.${cs.heading}`);
-      return h
-        ? new SplitText(h, {
-            type: "chars,words,lines",
-            linesClass: "clip-text",
-          })
-        : null;
+      return h ? new SplitText(h, { type: 'chars,words,lines', linesClass: 'clip-text' }) : null;
     });
 
     let currentIndex = -1;
@@ -40,7 +35,7 @@ export function ContinuousSec() {
       const dFactor = fromTop ? -1 : 1;
 
       const tl = gsap.timeline({
-        defaults: { duration: 1.25, ease: "power1.inOut" },
+        defaults: { duration: 1.25, ease: 'power1.inOut' },
         onComplete: () => (animating = false),
       });
 
@@ -50,10 +45,8 @@ export function ContinuousSec() {
         const prevBox = prevSection.querySelector(`.${cs.contentBox}`);
         gsap.set(sections[currentIndex], { zIndex: 0 });
         if (prevBox) tl.to(prevBox, { autoAlpha: 0, duration: 0.3 }, 0);
-        tl.to(images[currentIndex], { yPercent: -15 * dFactor }).set(
-          sections[currentIndex],
-          { autoAlpha: 0 },
-        );
+        tl.to(images[currentIndex], { yPercent: -15 * dFactor })
+          .set(sections[currentIndex], { autoAlpha: 0 });
       }
 
       // показываем текущий
@@ -65,8 +58,9 @@ export function ContinuousSec() {
         [outerWrappers[index], innerWrappers[index]],
         { yPercent: (i) => (i ? -100 * dFactor : 100 * dFactor) },
         { yPercent: 0 },
-        0,
-      ).fromTo(images[index], { yPercent: 15 * dFactor }, { yPercent: 0 }, 0);
+        0
+      )
+        .fromTo(images[index], { yPercent: 15 * dFactor }, { yPercent: 0 }, 0);
 
       if (splitHeadings[index]) {
         tl.fromTo(
@@ -76,10 +70,10 @@ export function ContinuousSec() {
             autoAlpha: 1,
             yPercent: 0,
             duration: 1,
-            ease: "power2",
-            stagger: { each: 0.02, from: "random" },
+            ease: 'power2',
+            stagger: { each: 0.02, from: 'random' },
           },
-          0.2,
+          0.2
         );
       }
 
@@ -88,8 +82,8 @@ export function ContinuousSec() {
         tl.fromTo(
           nextBox,
           { autoAlpha: 0, y: 20 },
-          { autoAlpha: 1, y: 0, duration: 0.8, ease: "power2" },
-          0.35,
+          { autoAlpha: 1, y: 0, duration: 0.8, ease: 'power2' },
+          0.35
         );
       }
 
@@ -97,7 +91,7 @@ export function ContinuousSec() {
     }
 
     observerRef.current = Observer.create({
-      type: "wheel,touch,pointer",
+      type: 'wheel,touch,pointer',
       wheelSpeed: -1,
       onDown: () => !animating && gotoSection(currentIndex - 1, -1),
       onUp: () => !animating && gotoSection(currentIndex + 1, 1),
@@ -133,73 +127,92 @@ export function ContinuousSec() {
     //   },
     // },
     {
-      id: "first",
-      heading: "",
-      img: "https://storage.yandexcloud.net/vizuz/1-sec.webp",
+      id: 'first',
+      heading: '',
+      img: 'https://storage.yandexcloud.net/vizuz/1-sec.webp',
       content: {
-        title: "Строительство с 2020",
+        title: 'Строительство с 2020',
         blocks: [
           {
-            subtitle: "",
+            subtitle: '',
             lines: [
-              "Строительная компания Grand Komfort Stroy основана в 2020 году с единственной целью — создавать комфортное и качественное жильё.",
-              "",
+              'Строительная компания Grand Komfort Stroy основана в 2020 году с единственной целью — создавать комфортное и качественное жильё.',
+                            '',
+
             ],
           },
         ],
       },
     },
     {
-      id: "third",
-      heading: "",
-      img: "https://storage.yandexcloud.net/vizuz/2-sec.webp",
+      id: 'third',
+      heading: '',
+      img: 'https://storage.yandexcloud.net/vizuz/2-sec.webp',
       content: {
-        title: "Сделано: 4 ЖК в срок",
+        title: 'Сделано: 4 ЖК в срок',
         blocks: [
           {
-            subtitle: "4 из 4 — сданы вовремя",
+            subtitle: '4 из 4 — сданы вовремя',
             lines: [
-              "В 2022 году были построены и сданы в эксплуатацию жилые комплексы «Акбидай-1» и «Гармония». Уже в 2023 году своих первых жителей принял ЖК «Акбидай-2», а в 2024 году успешно реализован пятиэтажный дом «Акбидай-3».",
-              "Все первые четыре жилых комплекса мы ввели точно в заявленные сроки. Для нас это не «подвиг», а стандарт.",
+              'В 2022 году были построены и сданы в эксплуатацию жилые комплексы «Акбидай-1» и «Гармония». Уже в 2023 году своих первых жителей принял ЖК «Акбидай-2», а в 2024 году успешно реализован пятиэтажный дом «Акбидай-3».',
+              'Все первые четыре жилых комплекса мы ввели точно в заявленные сроки. Для нас это не «подвиг», а стандарт.',
             ],
           },
         ],
       },
     },
     {
-      id: "fourth",
-      heading: "",
-      img: "https://storage.yandexcloud.net/vizuz/forabout-1.webp",
+      id: 'fourth',
+      heading: '',
+      img: 'https://storage.yandexcloud.net/vizuz/forabout-1.webp',
       content: {
-        title: "Подход к качеству",
+        title: 'Подход к качеству',
         blocks: [
           {
-            subtitle: "Качество — в деталях",
+            subtitle: 'Качество — в деталях',
             lines: [
-              "Мы строим кирпичные дома с продуманными планировками и современным благоустройством.",
-              "Главные приоритеты компании — сфокусированность на результате, ответственное выполнение обязательств, безупречная репутация и довольство наших клиентов.",
+              'Мы строим кирпичные дома с продуманными планировками и современным благоустройством.',
+'Главные приоритеты компании — сфокусированность на результате, ответственное выполнение обязательств, безупречная репутация и довольство наших клиентов.',
             ],
           },
         ],
       },
     },
     {
-      id: "fifth",
-      heading: "",
-      img: "https://storage.yandexcloud.net/vizuz/forabout-2.webp",
+      id: 'sixth',
+      heading: '',
+      img: 'https://storage.yandexcloud.net/vizuz/forabout-2.webp',
       content: {
-        title: "Дальше: ещё 2 проекта",
+        title: 'Дальше: ещё 2 проекта',
         blocks: [
           {
-            subtitle: "",
+            subtitle: '',
             lines: [
-              "В настоящее время ведётся строительство девятиэтажного жилого дома „Эдем“ — трёхподъездного комплекса, расположенного в спокойной части микрорайона „Васильковский.",
-              "Также строится жилой комплекс „Акбидай-4“ в новом, активно развивающемся районе между улицами Сулейменова и Габдулина.",
+              'В настоящее время ведётся строительство девятиэтажного жилого дома „Эдем“ — трёхподъездного комплекса, расположенного в спокойной части микрорайона „Васильковский',
+'Также строится жилой комплекс AQBIDAI IV в новом, активно развивающемся районе между улицами Сулейменова и Габдулина.',
             ],
           },
         ],
       },
     },
+    // {
+    //   id: 'fifth',
+    //   heading: '',
+    //   img: '',
+    //   content: {
+    //     title: 'Дальше: ещё 2 проекта',
+    //     blocks: [
+    //       {
+    //         subtitle: '',
+    //         lines: [
+    //           'В настоящее время ведётся строительство девятиэтажного жилого дома «Эдем» — трёхподъездного комплекса, расположенного в спокойном районе микрорайона Васильковский.',
+    //           'Также в стадии строительства находится новый жилой комплекс «Акбидай-4», который будет построен в районе Акбидай.',
+              
+    //         ],
+    //       },
+    //     ],
+    //   },
+    // },
   ];
 
   return (
