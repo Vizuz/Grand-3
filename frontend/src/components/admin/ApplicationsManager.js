@@ -72,11 +72,11 @@ export default function ApplicationsManager() {
   };
 
   return (
-    <div className="space-y-6 p-6">
+    <div className="space-y-6 p-4 sm:p-6 overflow-x-auto">
       {/* header */}
-      <div className="flex justify-between items-center">
+      <div className="flex flex-wrap items-start justify-between gap-3">
         <h2 className="text-2xl font-bold">Заявки клиентов</h2>
-        <div className="flex items-center space-x-4">
+        <div className="flex flex-wrap items-center gap-3 w-full sm:w-auto">
           <button
             onClick={refreshApplications}
             className="flex items-center bg-gray-200 px-3 py-1 rounded hover:bg-gray-300"
@@ -116,8 +116,8 @@ export default function ApplicationsManager() {
       </div>
 
       {/* table */}
-      <div className="bg-white shadow rounded-lg overflow-x-auto w-full">
-        <table className="min-w-full table-auto">
+      <div className="bg-white shadow rounded-lg overflow-x-auto w-full max-w-full">
+        <table className="min-w-[720px] md:min-w-full table-auto">
           <thead className="bg-gray-50">
             <tr>
               <Th>Клиент</Th>
@@ -133,7 +133,7 @@ export default function ApplicationsManager() {
               return (
                 <tr
                   key={a.id || a._id}
-                  className={`hover:bg-gray ${
+                  className={`hover:bg-gray-50 ${
                     a.status === "in_progress"
                       ? "bg-blue-50"
                       : a.status === "completed"
