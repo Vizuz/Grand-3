@@ -25,8 +25,16 @@ export default function AdminPage() {
   };
 
   if (!isAuthenticated) {
-    return <AdminLogin onLogin={handleLogin} />;
+    return (
+      <div className="w-full max-w-full overflow-x-auto">
+        <AdminLogin onLogin={handleLogin} />
+      </div>
+    );
   }
 
-  return <AdminDashboard onLogout={handleLogout} />;
+  return (
+    <div className="w-full max-w-full overflow-x-auto">
+      <AdminDashboard onLogout={handleLogout} />
+    </div>
+  );
 }
