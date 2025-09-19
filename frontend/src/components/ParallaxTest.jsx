@@ -5,10 +5,9 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 // Simple test component to visualize GSAP ScrollTrigger markers
 export default function ParallaxTest() {
   useLayoutEffect(() => {
-    console.log("ParallaxTest mounted"); // ← должно вывестись в консоль
+    
     gsap.registerPlugin(ScrollTrigger);
     const ctx = gsap.context(() => {
-      console.log("Creating animation"); // ← и тут тоже
       gsap.to(boxRef.current, {
         yPercent: 50,
         ease: "none",

@@ -26,7 +26,7 @@ export default function AdminDashboard({ onLogout }) {
   const stats = getAdminStats();
 
   const menuItems = [
-    { id: "overview", label: "Обзор", icon: Home },
+    // { id: "overview", label: "Обзор", icon: Home },
     //  { id: 'projects', label: 'Проекты', icon: Building2 },
     { id: "apartments", label: "Квартиры", icon: Settings },
     { id: "applications", label: "Заявки", icon: FileText },

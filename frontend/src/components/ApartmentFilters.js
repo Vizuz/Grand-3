@@ -6,10 +6,8 @@ import "rc-slider/assets/index.css";
 export default function ApartmentFilters({ filters, setFilters }) {
   const { apartments = [] } = useData();
 
-  // Для отладки
-  useEffect(() => {
-    console.log("→ пример данных apartments:", apartments.slice(0, 5));
-  }, [apartments]);
+
+  
 
   // Жилые комплексы — данные прямо в коде, с флагом soldOut
   const localProjects = [
