@@ -17,7 +17,7 @@ export default function ApartmentFilters({ filters, setFilters }) {
     {
       id: 4,
       name: "ЖК AQBIDAI 4",
-      address: "ул Кенжетаева 18",
+      address: "ул Кенжетаева 24",
       soldOut: false,
     },
     {
