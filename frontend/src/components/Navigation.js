@@ -89,7 +89,7 @@ export default function Navigation() {
               <img
                 src={
                   process.env.PUBLIC_URL +
-                  "https://storage.yandexcloud.net/vizuz/logo.webp"
+                  "https://storage.yandexcloud.net/vizuz/logo-update.webp"
                 }
                 alt="GRAND Logo"
                 className="h-16 w-auto"

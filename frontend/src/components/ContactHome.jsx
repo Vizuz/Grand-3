@@ -187,7 +187,7 @@ export default function ContactHome() {
               <img
                 src={
                   process.env.PUBLIC_URL +
-                  "https://storage.yandexcloud.net/vizuz/logo.webp"
+                  "https://storage.yandexcloud.net/vizuz/logo-update.webp"
                 }
                 alt="GRAND Logo"
               />
