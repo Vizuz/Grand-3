@@ -50,7 +50,7 @@ export default function ProjectsCarousel() {
       name: "ЖК Акбидай 4",
       address: "ул Кенжетаева 24",
       completion: "2026 (в процессе строительства)",
-      totalApartments: 115,
+      totalApartments: 110,
       floors: 5,
       description: "Продолжение успешного проекта с улучшенной планировкой.",
       features: ["Детская площадка", "Удобная парковка"],
