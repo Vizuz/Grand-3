@@ -55,18 +55,18 @@ export default function InfrastructureSection() {
       }}
     >
       {/* заголовок */}
-      <h2 className="text-5xl lg:text-6xl font-semibold text-white text-center mb-24">
+      <h2 className="text-4xl lg:text-6xl font-semibold text-white text-center mb-24">
         Внутренняя инфраструктура
       </h2>
 
       {/* полный по ширине контейнер */}
       <div className="w-full px-4 sm:px-8">
         {/* сетка: 1 колонка → 2 на планшете → 4 на десктопе */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 justify-items-stretch">
+        <div className="grid grid-cols-1 sm:grid-cols-2  md:grid-cols-2 xl:grid-cols-4 gap-8 justify-items-stretch ">
           {cards.map(({ Icon, title, text }, idx) => (
             <div
               key={idx}
-              className="w-full bg-white p-16 flex flex-col break-words"
+              className="w-full bg-white p-16 xl:p-8 flex flex-col break-words"
             >
               <Icon className="w-16 h-16 text-gray-800 mb-6 flex-shrink-0" />
               <h3 className="text-3xl font-medium text-gray-900 mb-4">
