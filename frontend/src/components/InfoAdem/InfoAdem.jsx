@@ -86,7 +86,6 @@ export default function InfoAdem() {
                   подсветкой
                 </li>
                 <li>Современные лифты, удобные лестничные клетки</li>
-                <li>Современные лифты, удобные лестничные клетки</li>
               </ul>
               <h3 className={styles.subTitle}>Расположение</h3>
               <ul className={styles.list}>
